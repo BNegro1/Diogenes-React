@@ -1,2 +1,5 @@
 Django
 Pandas
+whitenoise[brotli]
+gunicorn 
+uvicorn
