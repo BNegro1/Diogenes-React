@@ -1,15 +1,10 @@
-#!/usr/bin/env bash
-# Exit on error
-set -o errexit
+#!/bin/bash
 
-# Navega al directorio que contiene manage.py
-cd BuscaVinilos
-
-# Instala las dependencias
+# Instalar las dependencias del proyecto
 pip install -r requirements.txt
 
-# Recoge los archivos estáticos
-python manage.py collectstatic --no-input
-
-# Aplica las migraciones pendientes de la base de datos
+# Ejecutar migraciones de la base de datos
 python manage.py migrate
+
+# Recopilar archivos estáticos
+python manage.py collectstatic --no-input
