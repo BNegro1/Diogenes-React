@@ -1,3 +1,4 @@
+# webVinilos/views.py
 from django.shortcuts import render, redirect
 from django.http import JsonResponse
 from django.contrib import messages
@@ -5,13 +6,10 @@ from .models import Vinilo
 from .forms import CSVUploadForm
 import pandas as pd
 
-# Cargar datos desde la base de datos al iniciar el servidor
 def cargar_datos_bd():
-    # Crear un DataFrame de pandas a partir de la consulta a la base de datos
     data = pd.DataFrame(list(Vinilo.objects.all().values()))
     return data
 
-# Almacenar los datos de la base de datos en la variable `data`
 data = cargar_datos_bd()
 
 def inicio(request):
@@ -22,7 +20,6 @@ def buscar(request):
     album = request.GET.get('album', '')
 
     if artista and album:
-        # Buscar en la base de datos
         resultados = Vinilo.objects.filter(artista__icontains=artista, album__icontains=album)
     else:
         resultados = Vinilo.objects.none()
@@ -65,7 +62,6 @@ def gestor(request):
     
     return render(request, 'gestor.html', {'form': form})
 
-# Nueva vista para filtrar artistas
 def filtrar_artistas(request):
     query = request.GET.get('q', '').strip()
     if query:

@@ -2,11 +2,14 @@
 # Exit on error
 set -o errexit
 
-# Modify this line as needed for your package manager (pip, poetry, etc.)
+# Navega al directorio que contiene manage.py
+cd BuscaVinilos
+
+# Instala las dependencias
 pip install -r requirements.txt
 
-# Convert static asset files
+# Recoge los archivos estáticos
 python manage.py collectstatic --no-input
 
-# Apply any outstanding database migrations
+# Aplica las migraciones pendientes de la base de datos
 python manage.py migrate
