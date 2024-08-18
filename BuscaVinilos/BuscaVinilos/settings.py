@@ -7,7 +7,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 
 SECRET_KEY = 'django-insecure-eb2toi@qipih2w!x867aojj17#_4x8#)7_va^se%*ifesomv^+'
 
-DEBUG = True  # Cambiar a False en producción
+DEBUG = False  # Cambiar a False en producción
 
 ALLOWED_HOSTS = ['vinilos-91zg.onrender.com', 'localhost', '127.0.0.1']
 
@@ -59,10 +59,11 @@ DATABASES = {
     }
 }
 
-STATIC_URL = '/templates/'
+# Archivos estáticos
+STATIC_URL = '/static/'
 
 STATICFILES_DIRS = [
-    BASE_DIR / "webVinilos" / "templates",
+    BASE_DIR / "webVinilos" / "static",
 ]
 
 if not DEBUG:
