@@ -59,16 +59,16 @@ DATABASES = {
     }
 }
 
-STATIC_ROOT = ''
+STATIC_URL = '/templates/'
 
-STATIC_URL = '/static/'
+STATICFILES_DIRS = [
+    BASE_DIR / "webVinilos" / "templates",
+]
 
-STATICFILES_DIRS = ('D:/Repositorios/Busca-Vinilos-Django/BuscaVinilos/webVinilos/static',)
-'''
 if not DEBUG:
     STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
     STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
-'''
+
 LANGUAGE_CODE = 'en-us'
 TIME_ZONE = 'UTC'
 USE_I18N = True
