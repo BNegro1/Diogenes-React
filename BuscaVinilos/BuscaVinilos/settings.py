@@ -9,7 +9,8 @@ SECRET_KEY = 'django-insecure-eb2toi@qipih2w!x867aojj17#_4x8#)7_va^se%*ifesomv^+
 
 DEBUG = False  # Cambiar a False en producción
 
-ALLOWED_HOSTS = ['vinilos-91zg.onrender.com', 'localhost', '127.0.0.1']
+ALLOWED_HOSTS = ['tuvinilos.pythonanywhere.com']
+
 
 INSTALLED_APPS = [
     'django.contrib.admin',
