@@ -30,10 +30,32 @@ def catalogo(request):
     vinilos = Vinilo.objects.all()
     return render(request, 'catalogo.html', {'vinilos': vinilos})
 
+from django.shortcuts import render, redirect
+from django.http import JsonResponse
+from django.contrib import messages
+from .models import Vinilo
+from .forms import CSVUploadForm
+import pandas as pd
+
+def cargar_datos_bd():
+    data = pd.DataFrame(list(Vinilo.objects.all().values()))
+    return data
+
+data = cargar_datos_bd()
+
 def gestor(request):
     global data  # Permite modificar la variable global `data`
     
     if request.method == "POST":
+        if request.POST.get('action') == 'borrar':
+            # Borrar todos los registros de la base de datos
+            Vinilo.objects.all().delete()
+
+            # Recargar los datos
+            data = pd.DataFrame()  # Deja la variable `data` vacía porque no hay más registros
+            messages.success(request, "El catálogo ha sido borrado correctamente.")
+            return redirect('gestor')
+        
         form = CSVUploadForm(request.POST, request.FILES)
         if form.is_valid():
             archivo_csv = request.FILES['archivo_csv']
@@ -61,6 +83,7 @@ def gestor(request):
         form = CSVUploadForm()
     
     return render(request, 'gestor.html', {'form': form})
+
 
 def filtrar_artistas(request):
     query = request.GET.get('q', '').strip()
