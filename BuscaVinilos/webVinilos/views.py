@@ -1,4 +1,3 @@
-# webVinilos/views.py
 from django.shortcuts import render, redirect
 from django.http import JsonResponse
 from django.contrib import messages
@@ -10,7 +9,8 @@ def cargar_datos_bd():
     data = pd.DataFrame(list(Vinilo.objects.all().values()))
     return data
 
-data = cargar_datos_bd()
+# Borrar;:
+# data = cargar_datos_bd()
 
 def inicio(request):
     return render(request, 'inicio.html')
@@ -30,21 +30,9 @@ def catalogo(request):
     vinilos = Vinilo.objects.all()
     return render(request, 'catalogo.html', {'vinilos': vinilos})
 
-from django.shortcuts import render, redirect
-from django.http import JsonResponse
-from django.contrib import messages
-from .models import Vinilo
-from .forms import CSVUploadForm
-import pandas as pd
-
-def cargar_datos_bd():
-    data = pd.DataFrame(list(Vinilo.objects.all().values()))
-    return data
-
-data = cargar_datos_bd()
-
 def gestor(request):
-    global data  # Permite modificar la variable global `data`
+    # Cargar datos
+    data = cargar_datos_bd()
     
     if request.method == "POST":
         if request.POST.get('action') == 'borrar':
@@ -52,15 +40,15 @@ def gestor(request):
             Vinilo.objects.all().delete()
 
             # Recargar los datos
-            data = pd.DataFrame()  # Deja la variable `data` vacía porque no hay más registros
+            data = pd.DataFrame()  # 'data' vacía porque no hay más registros
             messages.success(request, "El catálogo ha sido borrado correctamente.")
             return redirect('gestor')
-        
+
         form = CSVUploadForm(request.POST, request.FILES)
         if form.is_valid():
             archivo_csv = request.FILES['archivo_csv']
             data = pd.read_csv(archivo_csv)  # Actualiza la variable `data` con el nuevo archivo
-            
+
             # Limpiar tabla antes de la nueva carga
             Vinilo.objects.all().delete()
 
@@ -81,9 +69,8 @@ def gestor(request):
             return redirect('gestor')
     else:
         form = CSVUploadForm()
-    
-    return render(request, 'gestor.html', {'form': form})
 
+    return render(request, 'gestor.html', {'form': form})
 
 def filtrar_artistas(request):
     query = request.GET.get('q', '').strip()
