@@ -9,7 +9,7 @@ def cargar_datos_bd():
     data = pd.DataFrame(list(Vinilo.objects.all().values()))
     return data
 
-# Borrar;:
+# Elimina esta línea:
 # data = cargar_datos_bd()
 
 def inicio(request):
@@ -31,7 +31,7 @@ def catalogo(request):
     return render(request, 'catalogo.html', {'vinilos': vinilos})
 
 def gestor(request):
-    # Cargar datos
+    # Mueve la carga de datos aquí
     data = cargar_datos_bd()
     
     if request.method == "POST":
@@ -40,14 +40,14 @@ def gestor(request):
             Vinilo.objects.all().delete()
 
             # Recargar los datos
-            data = pd.DataFrame()  # 'data' vacía porque no hay más registros
+            data = pd.DataFrame()  # Deja la variable `data` vacía porque no hay más registros
             messages.success(request, "El catálogo ha sido borrado correctamente.")
             return redirect('gestor')
 
         form = CSVUploadForm(request.POST, request.FILES)
         if form.is_valid():
             archivo_csv = request.FILES['archivo_csv']
-            data = pd.read_csv(archivo_csv)  # Actualizar la variable 'data' con el nuevo archivo
+            data = pd.read_csv(archivo_csv)  # Actualiza la variable `data` con el nuevo archivo
 
             # Limpiar tabla antes de la nueva carga
             Vinilo.objects.all().delete()
