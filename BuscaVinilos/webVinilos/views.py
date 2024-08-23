@@ -47,7 +47,7 @@ def gestor(request):
         form = CSVUploadForm(request.POST, request.FILES)
         if form.is_valid():
             archivo_csv = request.FILES['archivo_csv']
-            data = pd.read_csv(archivo_csv)  # Actualiza la variable `data` con el nuevo archivo
+            data = pd.read_csv(archivo_csv)  # Actualizar la variable 'data' con el nuevo archivo
 
             # Limpiar tabla antes de la nueva carga
             Vinilo.objects.all().delete()
