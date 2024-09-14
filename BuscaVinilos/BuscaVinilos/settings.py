@@ -8,7 +8,7 @@ SECRET_KEY = 'django-insecure-eb2toi@qipih2w!x867aojj17#_4x8#)7_va^se%*ifesomv^+
 # En producción, debe estar en False
 DEBUG = True
 
-# Asegúrate de agregar tu dominio o nombre en PythonAnywhere
+# Dominios - PythonAnywhere
 ALLOWED_HOSTS = ['localhost', '127.0.0.1', 'tuvinilos.pythonanywhere.com']
 
 INSTALLED_APPS = [
@@ -18,7 +18,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'webVinilos',  # Tu aplicación
+    'webVinilos',  # Aplicación
 ]
 
 MIDDLEWARE = [

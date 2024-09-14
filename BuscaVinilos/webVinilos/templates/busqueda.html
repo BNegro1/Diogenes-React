@@ -133,11 +133,7 @@
         }
     }
     // Cerrar sugerencias si se hace clic fuera
-    // Cerrar sugerencias si se hace clic fuera
     document.addEventListener("click", function(event) {
-        if (!event.target.closest("#artist-suggestions")) {
-            document.getElementById("artist-suggestions").classList.remove('show');
-        }
         if (!event.target.closest("#album-suggestions")) {
             document.getElementById("album-suggestions").classList.remove('show');
         }

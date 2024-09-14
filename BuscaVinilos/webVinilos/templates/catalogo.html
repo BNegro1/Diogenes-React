@@ -13,6 +13,35 @@
 
     <!-- Tu archivo CSS personalizado -->
     <link rel="stylesheet" href="{% static '/static/css/vinilos_styles.css' %}">
+    
+    <style>
+        /* Hacer que las filas de la tabla se vean como bloques en pantallas pequeñas */
+        @media (max-width: 768px) {
+            .table-responsive {
+                display: block;
+                overflow-x: unset;
+            }
+            .table thead {
+                display: none;
+            }
+            .table tbody tr {
+                display: block;
+                margin-bottom: 1rem;
+                border-bottom: 1px solid #dee2e6;
+            }
+            .table tbody tr td {
+                display: flex;
+                justify-content: space-between;
+                padding: 0.75rem;
+                border: none;
+            }
+            .table tbody tr td::before {
+                content: attr(data-label);
+                font-weight: bold;
+                width: 50%;
+            }
+        }
+    </style>
 </head>
 <body>
     <!--- Navbar -->
@@ -43,12 +72,12 @@
                     <tbody>
                         {% for vinilo in vinilos %}
                             <tr>
-                                <td>{{ vinilo.artista }}</td>
-                                <td>{{ vinilo.album }}</td>
-                                <td>{{ vinilo.estado }}</td>
-                                <td>{{ vinilo.precio }}</td>
-                                <td>{{ vinilo.comuna }}</td>
-                                <td>{{ vinilo.tienda }}</td>
+                                <td data-label="Artista">{{ vinilo.artista }}</td>
+                                <td data-label="Álbum">{{ vinilo.album }}</td>
+                                <td data-label="Estado (disco/caratula)">{{ vinilo.estado }}</td>
+                                <td data-label="Precio">{{ vinilo.precio }}</td>
+                                <td data-label="Comuna">{{ vinilo.comuna }}</td>
+                                <td data-label="Tienda">{{ vinilo.tienda }}</td>
                             </tr>
                         {% endfor %}
                     </tbody>
