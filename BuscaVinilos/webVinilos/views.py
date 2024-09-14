@@ -1,3 +1,4 @@
+from django.core.paginator import Paginator
 from django.shortcuts import render, redirect
 from django.http import JsonResponse
 from django.contrib import messages
@@ -15,6 +16,7 @@ def inicio(request):
 def buscar(request):
     artista = request.GET.get('artista', '').strip()
     album = request.GET.get('album', '').strip()
+    items_per_page = request.GET.get('items_per_page', 10)
 
     if artista and album:
         # Filtrar por el artista y el álbum específico
@@ -22,14 +24,30 @@ def buscar(request):
     elif artista:
         # Filtrar solo por el artista si no se ha especificado un álbum
         resultados = Vinilo.objects.filter(artista__icontains=artista)
+    elif album:
+        # Filtrar solo por el álbum si no se ha especificado un artista
+        resultados = Vinilo.objects.filter(album__icontains=album)
     else:
         resultados = Vinilo.objects.none()
 
-    return render(request, 'resultados.html', {'resultados': resultados, 'artista': artista, 'album': album})
+    paginator = Paginator(resultados, items_per_page)
+    page_number = request.GET.get('page')
+    page_obj = paginator.get_page(page_number)
+
+    return render(request, 'resultados.html', {
+        'page_obj': page_obj,
+        'artista': artista,
+        'album': album,
+        'items_per_page': items_per_page
+    })
 
 def catalogo(request):
     vinilos = Vinilo.objects.all()
-    return render(request, 'catalogo.html', {'vinilos': vinilos})
+    items_per_page = request.GET.get('items_per_page', 10)
+    paginator = Paginator(vinilos, items_per_page)
+    page_number = request.GET.get('page')
+    page_obj = paginator.get_page(page_number)
+    return render(request, 'catalogo.html', {'page_obj': page_obj, 'items_per_page': items_per_page})
 
 def gestor(request):
     data = cargar_datos_bd()
@@ -66,47 +84,3 @@ def gestor(request):
         form = CSVUploadForm()
 
     return render(request, 'gestor.html', {'form': form})
-
-def filtrar_artistas(request):
-    query = request.GET.get('q', '').strip().lower()
-
-    if query:
-        artistas = Vinilo.objects.filter(artista__icontains=query).values_list('artista', flat=True).distinct()[:5]
-        return JsonResponse(list(artistas), safe=False)
-
-    return JsonResponse([], safe=False)
-
-def filtrar_albums(request):
-    album_query = request.GET.get('q', '').strip().lower()
-
-    if album_query:
-        # Buscar álbumes que contengan la query y devolverlos con el formato "Artista - Álbum"
-        albums = Vinilo.objects.filter(album__icontains=album_query).values_list('artista', 'album').distinct()[:5]
-        suggestions = [f"{artista} - {album}" for artista, album in albums]
-        return JsonResponse(suggestions, safe=False)
-
-    return JsonResponse([], safe=False)
-
-
-
-def busqueda_vinilos(request):
-    return render(request, 'busqueda.html')
-
-def formatear_texto(texto):
-    return texto.capitalize()
-
-def filtrar_sugerencias(request):
-    query = request.GET.get('q', '').strip().lower()
-    resultados = Vinilo.objects.filter(artista__icontains=query) | Vinilo.objects.filter(album__icontains=query)
-    resultados = resultados.distinct()[:5]
-
-    sugerencias = []
-    for vinilo in resultados:
-        artista = formatear_texto(vinilo.artista)
-        album = formatear_texto(vinilo.album)
-        sugerencias.append(f"{artista} - {album}")
-
-    return JsonResponse({
-        'sugerencias': sugerencias,
-        'total_resultados': resultados.count()
-    })

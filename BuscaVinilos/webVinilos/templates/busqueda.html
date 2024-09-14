@@ -27,27 +27,29 @@
                 <!-- Campo de Búsqueda por Artista -->
                 <div class="col-12 col-md-6 mb-3 position-relative">
                     <label for="search-artist" class="form-label">Buscar por Artista</label>
-                    <div class="dropdown">
+                    <div class="input-group">
                         <input type="text" id="search-artist" name="search-artist" class="form-control"
                             placeholder="Escribe el nombre del artista"
-                            oninput="filterArtists()"
                             autocomplete="off">
-                        <div id="artist-suggestions" class="dropdown-menu w-100">
-                            <!-- Sugerencias de artistas se mostrarán aquí -->
-                        </div>
+                        <button class="btn btn-outline-secondary" type="button" onclick="searchVinyls()">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
+                                <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001l3.85 3.85a1 1 0 0 0 1.415-1.415l-3.85-3.85zm-5.442 1.1a5.5 5.5 0 1 1 0-11 5.5 5.5 0 0 1 0 11z"/>
+                            </svg>
+                        </button>
                     </div>
                 </div>
                 <!-- Campo de Búsqueda por Álbum -->
                 <div class="col-12 col-md-6 mb-3 position-relative">
                     <label for="search-album" class="form-label">Buscar por Álbum</label>
-                    <div class="dropdown">
+                    <div class="input-group">
                         <input type="text" id="search-album" name="search-album" class="form-control"
                                placeholder="Escribe el nombre del álbum"
-                               oninput="filterAlbums()"
                                autocomplete="off">
-                        <div id="album-suggestions" class="dropdown-menu w-100">
-                            <!-- Sugerencias de álbumes y artistas se mostrarán aquí -->
-                        </div>
+                        <button class="btn btn-outline-secondary" type="button" onclick="searchVinyls()">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
+                                <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001l3.85 3.85a1 1 0 0 0 1.415-1.415l-3.85-3.85zm-5.442 1.1a5.5 5.5 0 1 1 0-11 5.5 5.5 0 0 1 0 11z"/>
+                            </svg>
+                        </button>
                     </div>
                 </div>
             </div>
@@ -63,81 +65,26 @@
 
     <!-- Scripts -->
     <script>
-    // Función para buscar solo por artista
-    function filterArtists() {
-        const input = document.getElementById('search-artist').value.trim().toLowerCase();
-        const suggestions = document.getElementById('artist-suggestions');
-        suggestions.innerHTML = '';
+    function searchVinyls() {
+        const artist = document.getElementById('search-artist').value.trim();
+        const album = document.getElementById('search-album').value.trim();
+        let query = '';
 
-        if (input.length > 0) {
-            fetch(`/filtrar-artistas/?q=${input}`)
-                .then(response => response.json())
-                .then(data => {
-                    data.forEach(artist => {
-                        const suggestionItem = document.createElement('button');
-                        suggestionItem.className = 'dropdown-item';
-                        suggestionItem.type = 'button';
-                        suggestionItem.innerText = artist;
-                        suggestionItem.onclick = function() {
-                            // Redirigir a la página de resultados con el artista en la URL
-                            window.location.href = `/resultados/?artista=${artist}`;
-                        };
-                        suggestions.appendChild(suggestionItem);
-                    });
+        if (artist) {
+            query += `artista=${encodeURIComponent(artist)}`;
+        }
 
-                    if (data.length > 0) {
-                        suggestions.classList.add('show');
-                    } else {
-                        suggestions.classList.remove('show');
-                    }
-                });
-        } else {
-            suggestions.classList.remove('show');
+        if (album) {
+            if (query) {
+                query += '&';
+            }
+            query += `album=${encodeURIComponent(album)}`;
+        }
+
+        if (query) {
+            window.location.href = `/buscar/?${query}`;
         }
     }
-
-    // Función para buscar por álbum y mostrar el álbum específico
-    // Función para buscar por álbum y mostrar las sugerencias con el formato "Artista - Álbum"
-    // Función para buscar por álbum y mostrar las sugerencias con el formato "Artista - Álbum"
-    function filterAlbums() {
-        const input = document.getElementById('search-album').value.trim().toLowerCase();
-        const suggestions = document.getElementById('album-suggestions');
-        suggestions.innerHTML = '';
-
-        if (input.length > 0) {
-            fetch(`/filtrar-albums/?q=${input}`)
-                .then(response => response.json())
-                .then(data => {
-                    data.forEach(suggestion => {
-                        const suggestionItem = document.createElement('button');
-                        suggestionItem.className = 'dropdown-item';
-                        suggestionItem.type = 'button';
-                        suggestionItem.innerText = suggestion;
-
-                        suggestionItem.onclick = function() {
-                            const [suggestedArtist, suggestedAlbum] = suggestion.split(' - ');
-                            window.location.href = `/resultados/?artista=${encodeURIComponent(suggestedArtist)}&album=${encodeURIComponent(suggestedAlbum)}`;
-                        };
-
-                        suggestions.appendChild(suggestionItem);
-                    });
-
-                    if (data.length > 0) {
-                        suggestions.classList.add('show');
-                    } else {
-                        suggestions.classList.remove('show');
-                    }
-                });
-        } else {
-            suggestions.classList.remove('show');
-        }
-    }
-    // Cerrar sugerencias si se hace clic fuera
-    document.addEventListener("click", function(event) {
-        if (!event.target.closest("#album-suggestions")) {
-            document.getElementById("album-suggestions").classList.remove('show');
-        }
-    });
     </script>
 
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
