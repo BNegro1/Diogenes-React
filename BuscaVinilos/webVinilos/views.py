@@ -63,27 +63,40 @@ def gestor(request):
             archivo_csv = request.FILES['archivo_csv']
             data = pd.read_csv(archivo_csv)
 
-            # Verificar que las columnas necesarias están presentes en el archivo CSV
+            # Verificar que las columnas necesarias están presentes en el archivo CSV !!!!!!!!!!!!!!!!!!!!!
             required_columns = ['codigo', 'artista', 'album', 'estado', 'inserto', 'formato', 'precio', 'comuna', 'contacto', 'tienda']
             for column in required_columns:
                 if column not in data.columns:
                     messages.error(request, f"Falta la columna requerida: {column}")
                     return redirect('gestor')
 
+            # Eliminar el catálogo anterior
             Vinilo.objects.all().delete()
 
+            # Insertar nuevos datos del CSV
             for _, row in data.iterrows():
-                Vinilo.objects.create(
-                    artista=row['artista'],
-                    album=row['album'],
-                    estado=row['estado'],
-                    inserto=row['inserto'],
-                    formato=row['formato'],
-                    precio=row['precio'],
-                    comuna=row['comuna'],
-                    contacto=row['contacto'],
-                    tienda=row['tienda']
-                )
+                codigo = row['codigo'].strip()
+
+                # Verificar si ya existe un vinilo con el mismo código
+                if not Vinilo.objects.filter(codigo=codigo).exists():
+                    # Crear nuevo registro solo si no existe ya el código
+                    try:
+                        Vinilo.objects.create(
+                            codigo=codigo,
+                            artista=row['artista'],
+                            album=row['album'],
+                            estado=row['estado'],
+                            inserto=row['inserto'],
+                            formato=row['formato'],
+                            precio=row['precio'],
+                            comuna=row['comuna'],
+                            contacto=row['contacto'],
+                            tienda=row['tienda']
+                        )
+                    except Exception as e:
+                        messages.error(request, f"Error al crear el vinilo con código {codigo}: {str(e)}")
+                else:
+                    messages.warning(request, f"El código {codigo} ya existe en la base de datos, se omitió.")
 
             data = cargar_datos_bd()
 
