@@ -3,5 +3,5 @@ from .models import Vinilo
 
 @admin.register(Vinilo)
 class ViniloAdmin(admin.ModelAdmin):
-    list_display = ('artista', 'album', 'estado', 'precio', 'comuna', 'tienda')
+    list_display = ('codigo', 'artista', 'album', 'estado', 'inserto', 'formato', 'precio', 'comuna', 'contacto', 'tienda')
     search_fields = ('artista', 'album')

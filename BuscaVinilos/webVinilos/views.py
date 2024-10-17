@@ -48,7 +48,6 @@ def catalogo(request):
     page_number = request.GET.get('page')
     page_obj = paginator.get_page(page_number)
     return render(request, 'catalogo.html', {'page_obj': page_obj, 'items_per_page': items_per_page})
-
 def gestor(request):
     data = cargar_datos_bd()
 
@@ -64,16 +63,26 @@ def gestor(request):
             archivo_csv = request.FILES['archivo_csv']
             data = pd.read_csv(archivo_csv)
 
+            # Verificar que las columnas necesarias están presentes en el archivo CSV
+            required_columns = ['codigo', 'artista', 'album', 'estado', 'inserto', 'formato', 'precio', 'comuna', 'contacto', 'tienda']
+            for column in required_columns:
+                if column not in data.columns:
+                    messages.error(request, f"Falta la columna requerida: {column}")
+                    return redirect('gestor')
+
             Vinilo.objects.all().delete()
 
             for _, row in data.iterrows():
                 Vinilo.objects.create(
-                    artista=row['Artista'],
-                    album=row['Album'],
-                    estado=row['Estado (disco/caratula)'],
-                    precio=row['Precio'],
-                    comuna=row['Comuna'],
-                    tienda=row['Tienda']
+                    artista=row['artista'],
+                    album=row['album'],
+                    estado=row['estado'],
+                    inserto=row['inserto'],
+                    formato=row['formato'],
+                    precio=row['precio'],
+                    comuna=row['comuna'],
+                    contacto=row['contacto'],
+                    tienda=row['tienda']
                 )
 
             data = cargar_datos_bd()

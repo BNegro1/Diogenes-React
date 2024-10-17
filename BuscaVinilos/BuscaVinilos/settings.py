@@ -5,11 +5,11 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 
 SECRET_KEY = 'django-insecure-eb2toi@qipih2w!x867aojj17#_4x8#)7_va^se%*ifesomv^+'
 
-# En producción, debe estar en False
+# En producción, debe estar en !!! False !!!
 DEBUG = True
 
 # Dominios - PythonAnywhere
-ALLOWED_HOSTS = ['localhost', '127.0.0.1', 'tuvinilos.pythonanywhere.com']
+ALLOWED_HOSTS = ['127.0.0.1', 'buscavinilos.pythonanywhere.com']
 
 INSTALLED_APPS = [
     'django.contrib.admin',

@@ -63,23 +63,29 @@
             <table class="table table-bordered table-hover">
                 <thead class="table-dark">
                     <tr>
+                        <th>Código</th>
+                        <th>Precio</th>
                         <th>Artista</th>
                         <th>Álbum</th>
                         <th>Estado (disco/caratula)</th>
-                        <th>Precio</th>
+                        <th>Inserto, Poster, Etc.</th>
+                        <th>Formato</th>
                         <th>Comuna</th>
-                        <th>Tienda</th>
+                        <th>Contacto</th>
                     </tr>
                 </thead>
                 <tbody>
                     {% for vinilo in page_obj %}
                         <tr>
+                            <td data-label="Código">{{ vinilo.codigo }}</td>
+                            <td data-label="Precio">{{ vinilo.precio }}</td>
                             <td data-label="Artista">{{ vinilo.artista }}</td>
                             <td data-label="Álbum">{{ vinilo.album }}</td>
                             <td data-label="Estado (disco/caratula)">{{ vinilo.estado }}</td>
-                            <td data-label="Precio">{{ vinilo.precio }}</td>
+                            <td data-label="Inserto, Poster, Etc.">{{ vinilo.inserto }}</td>
+                            <td data-label="Formato">{{ vinilo.formato }}</td>
                             <td data-label="Comuna">{{ vinilo.comuna }}</td>
-                            <td data-label="Tienda">{{ vinilo.tienda }}</td>
+                            <td data-label="Contacto"><a href="{{ vinilo.contacto }}">Link</a></td>
                         </tr>
                     {% endfor %}
                 </tbody>
