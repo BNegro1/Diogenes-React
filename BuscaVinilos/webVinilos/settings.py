@@ -9,7 +9,8 @@ SECRET_KEY = 'django-insecure-eb2toi@qipih2w!x867aojj17#_4x8#)7_va^se%*ifesomv^+
 DEBUG = True
 
 # Asegúrate de agregar tu dominio o nombre en PythonAnywhere
-ALLOWED_HOSTS = ['localhost', '127.0.0.1', 'tuvinilos.pythonanywhere.com']
+# ALLOWED_HOSTS = ['localhost', '127.0.0.1', 'tuvinilos.pythonanywhere.com']
+ALLOWED_HOSTS = ['.vercel.app', 'localhost']
 
 INSTALLED_APPS = [
     'django.contrib.admin',

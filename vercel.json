@@ -1,0 +1,14 @@
+{
+  "builds": [
+    {
+      "src": "BuscaVinilos/wsgi.py",
+      "use": "@vercel/python"
+    }
+  ],
+  "routes": [
+    {
+      "src": "/(.*)",
+      "dest": "BuscaVinilos/wsgi.py"
+    }
+  ]
+}
