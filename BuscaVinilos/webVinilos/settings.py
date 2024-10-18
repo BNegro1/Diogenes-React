@@ -51,6 +51,8 @@ TEMPLATES = [
     },
 ]
 
+
+
 WSGI_APPLICATION = 'BuscaVinilos.wsgi.application'
 
 # Base de datos SQLite
@@ -62,8 +64,8 @@ DATABASES = {
 }
 
 STATIC_URL = '/static/'
-
-
+STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')]
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
 # Directorio donde están tus archivos estáticos para desarrollo
 STATICFILES_DIRS = [
@@ -71,7 +73,7 @@ STATICFILES_DIRS = [
 ]
 
 # WhiteNoise y archivos estáticos en producción
-STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
 # Configuración de idioma y zona horaria

@@ -7,7 +7,9 @@ body {
     display: flex;
     flex-direction: column;
     min-height: 100vh;
+    background: url("/BuscaVinilos/webVinilos/image/bg2.jpg");
   }
+
   
   .navbar {
     background-color: #1f1f1f;
