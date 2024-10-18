@@ -62,6 +62,8 @@ DATABASES = {
 
 # Archivos estáticos
 STATIC_URL = '/static/'
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+
 
 # Directorio donde están tus archivos estáticos para desarrollo
 STATICFILES_DIRS = [
