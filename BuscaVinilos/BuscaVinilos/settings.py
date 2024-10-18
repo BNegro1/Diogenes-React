@@ -6,10 +6,10 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-eb2toi@qipih2w!x867aojj17#_4x8#)7_va^se%*ifesomv^+'
 
 # En producción, debe estar en !!! False !!!
-DEBUG = True
+DEBUG = False
 
 # Dominios - PythonAnywhere
-ALLOWED_HOSTS = ['127.0.0.1', 'buscavinilos.pythonanywhere.com']
+ALLOWED_HOSTS = ['.vercel.app', 'localhost']
 
 INSTALLED_APPS = [
     'django.contrib.admin',

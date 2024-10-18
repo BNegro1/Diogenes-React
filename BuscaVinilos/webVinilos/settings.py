@@ -6,7 +6,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-eb2toi@qipih2w!x867aojj17#_4x8#)7_va^se%*ifesomv^+'
 
 # En producción, debe estar en False
-DEBUG = True
+DEBUG = False
 
 # Asegúrate de agregar tu dominio o nombre en PythonAnywhere
 # ALLOWED_HOSTS = ['localhost', '127.0.0.1', 'tuvinilos.pythonanywhere.com']
