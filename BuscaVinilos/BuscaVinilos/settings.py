@@ -1,3 +1,4 @@
+
 import os
 from pathlib import Path
 
@@ -5,11 +6,12 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 
 SECRET_KEY = 'django-insecure-eb2toi@qipih2w!x867aojj17#_4x8#)7_va^se%*ifesomv^+'
 
-# En producción, debe estar en !!! False !!!
-DEBUG = False  # Para producción
+# En producción, debe estar en False
+DEBUG = False
 
-# Dominios - PythonAnywhere
+# Asegúrate de agregar tu dominio o nombre en PythonAnywhere
 ALLOWED_HOSTS = ['.vercel.app', '127.0.0.1']
+
 
 INSTALLED_APPS = [
     'django.contrib.admin',
@@ -18,7 +20,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'webVinilos',  # Aplicación
+    'webVinilos',  # Tu aplicación
 ]
 
 MIDDLEWARE = [
@@ -62,8 +64,6 @@ DATABASES = {
 
 # Archivos estáticos
 STATIC_URL = '/static/'
-STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
-
 
 # Directorio donde están tus archivos estáticos para desarrollo
 STATICFILES_DIRS = [
