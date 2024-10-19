@@ -57,8 +57,12 @@ TEMPLATES = [
 WSGI_APPLICATION = 'BuscaVinilos.wsgi.application'
 
 # Base de datos SQLite
-DATABASES = {}
-
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': BASE_DIR / 'db.sqlite3',
+    }
+}
 
 # Archivos estáticos
 STATIC_URL = '/static/'
