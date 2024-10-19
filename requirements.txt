@@ -1,6 +1,6 @@
-Django
-Pandas
-whitenoise[brotli]
-gunicorn 
-uvicorn
-dj-database-url
+Django == 5.1.2
+Pandas == 2.2.3
+whitenoise[brotli] == 6.7.0
+gunicorn == 23.0.0
+uvicorn == 0.32.0
+dj-database-url == 2.2.0
