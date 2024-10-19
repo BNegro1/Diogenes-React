@@ -8,10 +8,6 @@
   ],
   "routes": [
     {
-      "src": "/",
-      "dest": "BuscaVinilos/BuscaVinilos/wsgi.py"
-    },
-    {
       "src": "/(.*)",
       "dest": "BuscaVinilos/BuscaVinilos/wsgi.py"
     }

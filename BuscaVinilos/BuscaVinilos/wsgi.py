@@ -1,12 +1,11 @@
 import os
 import sys
 
-# Añadir la ruta correcta al sys.path
-sys.path.append(os.path.join(os.path.dirname(__file__), 'BuscaVinilos'))
+sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
-# Establecer la variable DJANGO_SETTINGS_MODULE con el path correcto
+from django.core.wsgi import get_wsgi_application
+
 os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'BuscaVinilos.settings')
 
-# Obtener la aplicación WSGI
-from django.core.wsgi import get_wsgi_application
 application = get_wsgi_application()
+app = application
