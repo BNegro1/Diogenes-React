@@ -30,6 +30,9 @@ def buscar(request):
     else:
         resultados = Vinilo.objects.none()
 
+    # Ordenar los resultados antes de paginarlos
+    resultados = resultados.order_by('id')
+
     paginator = Paginator(resultados, items_per_page)
     page_number = request.GET.get('page')
     page_obj = paginator.get_page(page_number)
@@ -44,10 +47,15 @@ def buscar(request):
 def catalogo(request):
     vinilos = Vinilo.objects.all()
     items_per_page = request.GET.get('items_per_page', 10)
+
+    # Ordenar los vinilos antes de paginarlos
+    vinilos = vinilos.order_by('id')
+
     paginator = Paginator(vinilos, items_per_page)
     page_number = request.GET.get('page')
     page_obj = paginator.get_page(page_number)
     return render(request, 'catalogo.html', {'page_obj': page_obj, 'items_per_page': items_per_page})
+
 def gestor(request):
     data = cargar_datos_bd()
 
@@ -63,7 +71,7 @@ def gestor(request):
             archivo_csv = request.FILES['archivo_csv']
             data = pd.read_csv(archivo_csv)
 
-            # Verificar que las columnas necesarias están presentes en el archivo CSV !!!!!!!!!!!!!!!!!!!!!
+            # Verificar que las columnas necesarias están presentes en el archivo CSV
             required_columns = ['codigo', 'artista', 'album', 'estado', 'inserto', 'formato', 'precio', 'comuna', 'contacto', 'tienda']
             for column in required_columns:
                 if column not in data.columns:

@@ -10,6 +10,9 @@ SECRET_KEY = 'django-insecure-eb2toi@qipih2w!x867aojj17#_4x8#)7_va^se%*ifesomv^+
 DEBUG = True
 
 ALLOWED_HOSTS = [
+    'localhost:8000',
+    '127.0.0.1',
+    '127.0.0.1:8000'
     'localhost',
     '.vercel.app',
     'diogenescds.vercel.app/'  # Reemplaza con tu dominio real en Vercel
