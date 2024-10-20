@@ -1,5 +1,4 @@
 {
-  "version": 2,
   "builds": [
     {
       "src": "BuscaVinilos/BuscaVinilos/wsgi.py",
@@ -8,10 +7,6 @@
     }
   ],
   "routes": [
-    {
-      "src": "/static/(.*)",
-      "dest": "/static/$1"
-    },
     {
       "src": "/(.*)",
       "dest": "BuscaVinilos/BuscaVinilos/wsgi.py"

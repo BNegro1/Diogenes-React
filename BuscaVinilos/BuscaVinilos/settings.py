@@ -2,7 +2,7 @@
 import os
 from pathlib import Path
 
-BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+BASE_DIR = Path(__file__).resolve().parent.parent
 
 SECRET_KEY = 'django-insecure-eb2toi@qipih2w!x867aojj17#_4x8#)7_va^se%*ifesomv^+'
 
@@ -44,7 +44,7 @@ ROOT_URLCONF = 'BuscaVinilos.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [BASE_DIR / 'webVinilos' / 'templates'],  # Aquí defines el directorio de templates
+        'DIRS': [BASE_DIR / 'webVinilos' / 'templates'],  # Esto ahora es correcto
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
