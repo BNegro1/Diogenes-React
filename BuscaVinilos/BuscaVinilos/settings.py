@@ -2,7 +2,7 @@
 import os
 from pathlib import Path
 
-BASE_DIR = Path(__file__).resolve().parent.parent
+BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 SECRET_KEY = 'django-insecure-eb2toi@qipih2w!x867aojj17#_4x8#)7_va^se%*ifesomv^+'
 
@@ -59,13 +59,15 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'BuscaVinilos.wsgi.application'
 
-# Base de datos SQLite
+BASE_DIR
+
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'NAME': os.path.join('/tmp', 'db.sqlite3'),  # Ubicación temporal en Vercel
     }
 }
+
 
 # Archivos estáticos
 STATIC_URL = '/static/'
