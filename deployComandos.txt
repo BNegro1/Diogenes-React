@@ -1,0 +1,35 @@
+# 1. Limpia todo (comandos adaptados para PowerShell)
+Remove-Item -Path "dist", "node_modules", ".vercel", "package-lock.json" -Recurse -Force -ErrorAction SilentlyContinue
+npm cache clean --force
+
+# 2. Reinstala dependencias
+npm install
+
+# 3. Verifica versión de Node
+node --version  # Asegúrate que sea v18.x.x
+
+# 4. Construye el proyecto
+npm run build
+
+# 5. Instala Vercel CLI globalmente (si no lo tienes)
+npm install -g vercel
+
+# 6. Inicia sesión en Vercel (si no lo has hecho)
+vercel login
+
+# 7. Despliega a producción
+vercel --prod
+
+
+Recuerda:
+
+Ejecuta los comandos en orden
+Cuando ejecutes vercel por primera vez, selecciona:
+
+Set up and deploy: Y
+Which scope: <tu cuenta>
+Link to existing project: N
+Project name: diogenescds
+In which directory is your code located? ./ (Enter)
+Want to override the settings? N
+

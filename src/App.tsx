@@ -1,14 +1,16 @@
+import { Suspense, lazy } from 'react';
 import { IonApp, IonRouterOutlet, setupIonicReact } from '@ionic/react';
 import { IonReactRouter } from '@ionic/react-router';
 import { Route, Redirect } from 'react-router-dom';
 import { AnimatePresence } from 'framer-motion';
-
-import Home from './pages/Home';
-import Search from './pages/Search';
-import Catalog from './pages/Catalog';
-import Admin from './pages/Admin';
 import Layout from './components/Layout';
 import { ThemeProvider } from './context/ThemeContext';
+
+// Lazy loading de páginas
+const Home = lazy(() => import('./pages/Home'));
+const Search = lazy(() => import('./pages/Search'));
+const Catalog = lazy(() => import('./pages/Catalog'));
+const Admin = lazy(() => import('./pages/Admin'));
 
 /* Core CSS required for Ionic components to work properly */
 import '@ionic/react/css/core.css';
@@ -34,15 +36,17 @@ const App: React.FC = () => (
       <IonReactRouter>
         <Layout>
           <AnimatePresence mode="wait">
-            <IonRouterOutlet>
-              <Route exact path="/home" component={Home} />
-              <Route exact path="/search" component={Search} />
-              <Route exact path="/catalog" component={Catalog} />
-              <Route exact path="/admin" component={Admin} />
-              <Route exact path="/">
-                <Redirect to="/home" />
-              </Route>
-            </IonRouterOutlet>
+            <Suspense fallback={<div>Loading...</div>}>
+              <IonRouterOutlet>
+                <Route exact path="/home" component={Home} />
+                <Route exact path="/search" component={Search} />
+                <Route exact path="/catalog" component={Catalog} />
+                <Route exact path="/admin" component={Admin} />
+                <Route exact path="/">
+                  <Redirect to="/home" />
+                </Route>
+              </IonRouterOutlet>
+            </Suspense>
           </AnimatePresence>
         </Layout>
       </IonReactRouter>

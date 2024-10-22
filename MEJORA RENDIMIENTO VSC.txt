@@ -1,0 +1,12 @@
+
+# 1. Detén el servidor de desarrollo si está corriendo
+# Presiona Ctrl + C en la terminal
+
+# 2. Cierra todas las terminales en VSCode
+# Click en el icono de la papelera en el panel de la terminal
+
+# 3. Reinicia el servidor de TypeScript
+# 1. Presiona Ctrl + Shift + P
+# 2. Escribe "TypeScript: Restart TS Server"
+# 3. Presiona Enter
+
