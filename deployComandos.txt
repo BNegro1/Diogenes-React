@@ -5,6 +5,12 @@ npm cache clean --force
 # 2. Reinstala dependencias
 npm install
 
+
+
+
+Lo ideal es desde aca (si nop hay problemas con dependencias);
+
+
 # 3. Verifica versión de Node
 node --version  # Asegúrate que sea v18.x.x
 
@@ -19,6 +25,7 @@ vercel login
 
 # 7. Despliega a producción
 vercel --prod
+
 
 
 Recuerda:

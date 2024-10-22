@@ -5,6 +5,7 @@ import { Route, Redirect } from 'react-router-dom';
 import { AnimatePresence } from 'framer-motion';
 import Layout from './components/Layout';
 import { ThemeProvider } from './context/ThemeContext';
+import { Analytics } from '@vercel/analytics/react';
 
 // Lazy loading de páginas
 const Home = lazy(() => import('./pages/Home'));
@@ -48,6 +49,7 @@ const App: React.FC = () => (
               </IonRouterOutlet>
             </Suspense>
           </AnimatePresence>
+          <Analytics />
         </Layout>
       </IonReactRouter>
     </IonApp>
