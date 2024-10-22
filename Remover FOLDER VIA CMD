@@ -1,1 +1,0 @@
-Remove-Item -Path staticfiles\* -Recurse -Force
