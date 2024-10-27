@@ -1,169 +1,78 @@
-import { useState } from 'react';
-import { IonPage, IonSearchbar, IonList, IonItem, IonLabel, IonAlert } from '@ionic/react';
-import { motion, AnimatePresence } from 'framer-motion';
-import { Music2, Disc, Search as SearchIcon } from 'lucide-react';
-
-interface SearchFilters {
-  artist?: string;
-  album?: string;
-}
-
-interface SearchResult {
-  id: number;
-  artist: string;
-  album: string;
-}
+import React, { useState } from 'react';
+import { IonContent, IonCard, IonCardContent } from '@ionic/react';
+import { motion } from 'framer-motion';
+import Layout from '../components/Layout';
+import SearchFilter from '../components/SearchFilter';
+import RecordTable from '../components/RecordTable';
+import { useStore } from '../store/useStore';
+import { VinylRecord } from '../types/Record';
 
 const Home: React.FC = () => {
-  const [filters, setFilters] = useState<SearchFilters>({});
-  const [showAlert, setShowAlert] = useState(false);
-  const [searchResults, setSearchResults] = useState<SearchResult[]>([]);
-  const [isSearching, setIsSearching] = useState(false);
+  const records = useStore((state) => state.records);
+  const [filteredRecords, setFilteredRecords] = useState<VinylRecord[]>([]);
+  const [hasSearched, setHasSearched] = useState(false);
 
-  const handleSearch = () => {
-    if (!filters.artist && !filters.album) {
-      setShowAlert(true);
-      return;
-    }
-    
-    setIsSearching(true);
-    // Simulated search results
-    setTimeout(() => {
-      setSearchResults([
-        { id: 1, artist: 'Artist 1', album: 'Album 1' },
-        { id: 2, artist: 'Artist 2', album: 'Album 2' },
-      ]);
-      setIsSearching(false);
-    }, 1000);
+  const handleSearch = (artist: string, album: string) => {
+    const filtered = records.filter((record) => {
+      const matchArtist = artist
+        ? record.ARTISTA.toLowerCase().includes(artist.toLowerCase())
+        : true;
+      const matchAlbum = album
+        ? record.ALBUM.toLowerCase().includes(album.toLowerCase())
+        : true;
+      return matchArtist && matchAlbum;
+    });
+    setFilteredRecords(filtered);
+    setHasSearched(true);
   };
 
   return (
-    <IonPage>
-      <div className="relative min-h-screen">
-        {/* Hero Image Background */}
-        <div 
-          className="absolute inset-0 bg-cover bg-center bg-no-repeat"
-          style={{
-            backgroundImage: 'url(https://images.unsplash.com/photo-1514320291840-2e0a9bf2a9ae?auto=format&fit=crop&q=80)',
-            filter: 'brightness(0.3)'
-          }}
-        />
-
-        {/* Content Overlay */}
-        <div className="relative z-10 min-h-screen">
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            className="container mx-auto px-4 pt-20"
-          >
-            {/* Hero Text */}
+    <Layout title="Vinyl Records">
+      <IonContent>
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 0.5 }}
+          className="relative"
+        >
+          <div
+            className="h-[40vh] md:h-[50vh] bg-cover bg-center"
+            style={{
+              backgroundImage:
+                'url("https://images.unsplash.com/photo-1461360228754-6e81c478b882?ixlib=rb-1.2.1&auto=format&fit=crop&w=1920&q=80")',
+            }}
+          />
+          <div className="absolute inset-0 bg-black bg-opacity-50 flex items-center justify-center px-4">
             <motion.div
               initial={{ y: 20, opacity: 0 }}
               animate={{ y: 0, opacity: 1 }}
               transition={{ delay: 0.2 }}
-              className="text-center mb-12"
+              className="text-center"
             >
-              <h1 className="text-5xl font-bold text-white mb-4">
-                Discover Your Music
+              <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold text-white mb-4">
+                Descubre Tu Vinilo Perfecto
               </h1>
-              <p className="text-xl text-gray-300">
-                Search through millions of tracks in our database
+              <p className="text-white text-lg md:text-xl opacity-90">
+                Explora nuestra colección única de vinilos
               </p>
             </motion.div>
+          </div>
+        </motion.div>
 
-            {/* Search Section */}
-            <motion.div
-              initial={{ y: 20, opacity: 0 }}
-              animate={{ y: 0, opacity: 1 }}
-              transition={{ delay: 0.4 }}
-              className="max-w-2xl mx-auto bg-white/10 backdrop-blur-lg rounded-xl p-6 shadow-lg"
-            >
-              <div className="space-y-4">
-                <div className="flex items-center space-x-4">
-                  <Music2 className="w-6 h-6 text-primary-light" />
-                  <IonSearchbar
-                    placeholder="Search by artist..."
-                    value={filters.artist}
-                    onIonChange={e => setFilters(prev => ({ ...prev, artist: e.detail.value! }))}
-                    className="rounded-lg bg-white/5"
-                  />
+        <div className="max-w-7xl mx-auto px-4 py-6">
+          <IonCard>
+            <IonCardContent>
+              <SearchFilter onSearch={handleSearch} />
+              {hasSearched && (
+                <div className="mt-6">
+                  <RecordTable records={filteredRecords} />
                 </div>
-                
-                <div className="flex items-center space-x-4">
-                  <Disc className="w-6 h-6 text-primary-light" />
-                  <IonSearchbar
-                    placeholder="Search by album..."
-                    value={filters.album}
-                    onIonChange={e => setFilters(prev => ({ ...prev, album: e.detail.value! }))}
-                    className="rounded-lg bg-white/5"
-                  />
-                </div>
-
-                <motion.button
-                  whileHover={{ scale: 1.02 }}
-                  whileTap={{ scale: 0.98 }}
-                  onClick={handleSearch}
-                  className="w-full py-3 bg-primary-light hover:bg-primary text-white rounded-lg shadow-md flex items-center justify-center space-x-2 transition-colors duration-200"
-                >
-                  <SearchIcon className="w-5 h-5" />
-                  <span>Search</span>
-                </motion.button>
-              </div>
-
-              {/* Search Results */}
-              <AnimatePresence>
-                {searchResults.length > 0 && (
-                  <motion.div
-                    initial={{ opacity: 0, y: 20 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    exit={{ opacity: 0, y: -20 }}
-                    className="mt-8"
-                  >
-                    <IonList className="bg-white/5 rounded-lg overflow-hidden">
-                      {searchResults.map((result) => (
-                        <motion.div
-                          key={result.id}
-                          initial={{ opacity: 0 }}
-                          animate={{ opacity: 1 }}
-                          transition={{ duration: 0.2 }}
-                        >
-                          <IonItem className="bg-transparent text-white">
-                            <IonLabel>
-                              <h2 className="text-lg font-semibold">{result.album}</h2>
-                              <p className="text-gray-300">{result.artist}</p>
-                            </IonLabel>
-                          </IonItem>
-                        </motion.div>
-                      ))}
-                    </IonList>
-                  </motion.div>
-                )}
-
-                {isSearching && (
-                  <motion.div
-                    initial={{ opacity: 0 }}
-                    animate={{ opacity: 1 }}
-                    exit={{ opacity: 0 }}
-                    className="mt-8 text-center text-white"
-                  >
-                    <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-primary-light mx-auto" />
-                    <p className="mt-2">Searching...</p>
-                  </motion.div>
-                )}
-              </AnimatePresence>
-            </motion.div>
-          </motion.div>
+              )}
+            </IonCardContent>
+          </IonCard>
         </div>
-
-        <IonAlert
-          isOpen={showAlert}
-          onDidDismiss={() => setShowAlert(false)}
-          header="Search Error"
-          message="Please enter at least one search criteria"
-          buttons={['OK']}
-        />
-      </div>
-    </IonPage>
+      </IonContent>
+    </Layout>
   );
 };
 

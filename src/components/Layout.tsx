@@ -1,43 +1,49 @@
 import React from 'react';
-import { IonContent, IonHeader, IonToolbar, IonTitle, IonButtons, IonButton, IonIcon } from '@ionic/react';
-import { Moon, Sun } from 'lucide-react';
-import { useTheme } from '../context/ThemeContext';
-import Navigation from './Navigation';
-import { motion } from 'framer-motion';
+import {
+  IonContent,
+  IonHeader,
+  IonToolbar,
+  IonTitle,
+  IonButtons,
+  IonButton,
+  IonIcon,
+  IonPage,
+} from '@ionic/react';
+import { home, library, settings } from 'ionicons/icons';
+import { useHistory } from 'react-router-dom';
+import Footer from './Footer';
 
-const Layout: React.FC<{ children: React.ReactNode }> = ({ children }) => {
-  const { theme, toggleTheme } = useTheme();
+interface LayoutProps {
+  children: React.ReactNode;
+  title: string;
+}
+
+const Layout: React.FC<LayoutProps> = ({ children, title }) => {
+  const history = useHistory();
 
   return (
-    <>
-      <IonHeader className="ion-no-border">
-        <IonToolbar className={`${theme === 'dark' ? 'bg-gray-800/90' : 'bg-white/90'} backdrop-blur-lg`}>
-          <motion.div
-            initial={{ opacity: 0, y: -20 }}
-            animate={{ opacity: 1, y: 0 }}
-            className="flex items-center justify-between px-4"
-          >
-            <IonTitle className="text-2xl font-bold text-primary">
-              Music App
-            </IonTitle>
-            <IonButtons slot="end">
-              <motion.div
-                whileHover={{ scale: 1.1 }}
-                whileTap={{ scale: 0.9 }}
-              >
-                <IonButton onClick={toggleTheme} className="w-10 h-10">
-                  <IonIcon icon={theme === 'dark' ? Sun : Moon} />
-                </IonButton>
-              </motion.div>
-            </IonButtons>
-          </motion.div>
+    <IonPage>
+      <IonHeader>
+        <IonToolbar color="primary">
+          <IonTitle>{title}</IonTitle>
+          <IonButtons slot="end">
+            <IonButton onClick={() => history.push('/home')}>
+              <IonIcon icon={home} />
+            </IonButton>
+            <IonButton onClick={() => history.push('/catalog')}>
+              <IonIcon icon={library} />
+            </IonButton>
+            <IonButton onClick={() => history.push('/manager')}>
+              <IonIcon icon={settings} />
+            </IonButton>
+          </IonButtons>
         </IonToolbar>
-        <Navigation />
       </IonHeader>
-      <IonContent className={theme === 'dark' ? 'bg-gray-900' : 'bg-gray-50'}>
+      <IonContent>
         {children}
       </IonContent>
-    </>
+      <Footer />
+    </IonPage>
   );
 };
 

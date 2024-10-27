@@ -1,17 +1,11 @@
-import { Suspense, lazy } from 'react';
+import React from 'react';
 import { IonApp, IonRouterOutlet, setupIonicReact } from '@ionic/react';
 import { IonReactRouter } from '@ionic/react-router';
 import { Route, Redirect } from 'react-router-dom';
-import { AnimatePresence } from 'framer-motion';
-import Layout from './components/Layout';
-import { ThemeProvider } from './context/ThemeContext';
-import { Analytics } from '@vercel/analytics/react';
 
-// Lazy loading de páginas
-const Home = lazy(() => import('./pages/Home'));
-const Search = lazy(() => import('./pages/Search'));
-const Catalog = lazy(() => import('./pages/Catalog'));
-const Admin = lazy(() => import('./pages/Admin'));
+import Home from './pages/Home';
+import Catalog from './pages/Catalog';
+import Manager from './pages/Manager';
 
 /* Core CSS required for Ionic components to work properly */
 import '@ionic/react/css/core.css';
@@ -29,31 +23,25 @@ import '@ionic/react/css/text-transformation.css';
 import '@ionic/react/css/flex-utils.css';
 import '@ionic/react/css/display.css';
 
+/* Theme variables */
+import './theme/variables.css';
+import './index.css';
+
 setupIonicReact();
 
 const App: React.FC = () => (
-  <ThemeProvider>
-    <IonApp>
-      <IonReactRouter>
-        <Layout>
-          <AnimatePresence mode="wait">
-            <Suspense fallback={<div>Loading...</div>}>
-              <IonRouterOutlet>
-                <Route exact path="/home" component={Home} />
-                <Route exact path="/search" component={Search} />
-                <Route exact path="/catalog" component={Catalog} />
-                <Route exact path="/admin" component={Admin} />
-                <Route exact path="/">
-                  <Redirect to="/home" />
-                </Route>
-              </IonRouterOutlet>
-            </Suspense>
-          </AnimatePresence>
-          <Analytics />
-        </Layout>
-      </IonReactRouter>
-    </IonApp>
-  </ThemeProvider>
+  <IonApp>
+    <IonReactRouter>
+      <IonRouterOutlet>
+        <Route exact path="/home" component={Home} />
+        <Route exact path="/catalog" component={Catalog} />
+        <Route exact path="/manager" component={Manager} />
+        <Route exact path="/">
+          <Redirect to="/home" />
+        </Route>
+      </IonRouterOutlet>
+    </IonReactRouter>
+  </IonApp>
 );
 
 export default App;

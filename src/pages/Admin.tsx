@@ -83,10 +83,10 @@ const Admin: React.FC = () => {
           className="p-4 space-y-6"
         >
           <div className="space-y-4">
-            <h2 className="text-2xl font-bold">Database Management</h2>
+            <h2 className="text-2xl font-bold">Gstionar base de datos</h2>
             
             <div className="border rounded-lg p-4 space-y-4">
-              <h3 className="text-xl">Update Database</h3>
+              <h3 className="text-xl">Actualizar base de datos</h3>
               <input
                 type="file"
                 accept=".csv,.xlsx"
