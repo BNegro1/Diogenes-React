@@ -1,0 +1,19 @@
+Necesito que desarrolles en Ionic, React y Vite (Responsivo) con una arquitectura modular que permita reutilizar componentes, como botones, y separación de vistas. Haz la página de "inicio" de tal forma como la que adjunté en la captura, un hero image en la vista principal.
+Vista No. 1 "inicio": implementa un filtro por álbum o artista. Si se proporcionan ambos, el filtro debe devolver los resultados que coincidan con ambos. Si solo se ingresa uno de los parámetros, debe filtrar según corresponda. Si no se proporciona ningún dato, no debe devolver resultados (Tira un modal para indicar que no se puede, TODO EN ESPAÑOL).
+Vista No. 3 "catalogo": muestra TODOS los registros de la base de datos (que se subió en formato .xlsx) en un formato de tabla.
+Vista No. 3 "gestor": Tiene que existir un login y permite la carga de archivos .xlsx.
+Implementa todas las funcionalidades solicitadas y utiliza diversas animaciones de texto, diseño
+
+
+
+
+
+Necesito que desarrolles en Ionic, React y Vite (Responsivo) con una arquitectura modular que permita reutilizar componentes, como botones, y separación de vistas. Haz la página de "inicio" de tal forma como la que adjunté en la captura, un hero image en la vista principal.
+Vista No. 1 "inicio": implementa un filtro por álbum o artista. Si se proporcionan ambos, el filtro debe devolver los resultados que coincidan con ambos. Si solo se ingresa uno de los parámetros, debe filtrar según corresponda. Si no se proporciona ningún dato, no debe devolver resultados (Tira un modal para indicar que no se puede, TODO EN ESPAÑOL).
+Vista No. 2 "catalogo": muestra TODOS los registros de la base de datos (que se subió en formato .xlsx) en un formato de tabla.
+Vista No. 3 "gestor": Tiene que existir un login y permite la carga de archivos .xlsx.
+Implementa todas las funcionalidades solicitadas y utiliza diversas animaciones de texto, diseño.
+
+Estructura del header del EXCEL:
+CODIGO	PRECIO	ARTISTA	ALBUM	ESTADO	INSERTO_POSTER	FORMATO	COMUNA	CONTACTO
+

@@ -1,0 +1,101 @@
+CODIGO,PRECIO,ARTISTA,ALBUM,ESTADO,INSERTO_POSTER,FORMATO,COMUNA,CONTACTO
+ART001,27722,System of a Down,Master of Puppets,excelente,sí,Vinilo,LA FLORIDA,DISCOS IMPORTADOS
+ART002,22075,Coldplay,Audioslave,excelente,sí,Vinilo,LA FLORIDA,LA CUEVA MUSICAL
+ART003,32371,Pearl Jam,Audioslave,excelente,sí,Vinilo,LA REINA,DISCOS BRITANICOS
+ART004,33510,Pearl Jam,Master of Puppets,excelente,sí,Vinilo,LAS CONDES,ROCK & ROLL HEAVEN
+ART005,31488,Coldplay,Parachutes,bueno,sí,Vinilo,LA REINA,MELODIAS
+ART006,25928,Audioslave,Ten,bueno,no,Vinilo,SANTIAGO CENTRO,PUNK ROCK RECORDS
+ART007,15873,Metallica,Hybrid Theory,excelente,sí,Vinilo,LAS CONDES,DISCOS BRITANICOS
+ART008,19695,Audioslave,Audioslave,bueno,sí,Vinilo,LAS CONDES,PUNK ROCK RECORDS
+ART009,28965,Pearl Jam,Toxicity,bueno,no,Vinilo,SANTIAGO CENTRO,DISCOS BRITANICOS
+ART010,20827,Foo Fighters,Ten,excelente,sí,Vinilo,SANTIAGO CENTRO,PUNK ROCK RECORDS
+ART011,25602,Foo Fighters,Ten,bueno,sí,Vinilo,PROVIDENCIA,MELODIAS
+ART012,16294,Rage Against the Machine,Hybrid Theory,bueno,no,Vinilo,SANTIAGO CENTRO,DISCOS ALTERNATIVOS
+ART013,26715,System of a Down,Parachutes,excelente,sí,Vinilo,LA REINA,LA TIENDA DEL ROCK
+ART014,27442,Metallica,(What's the Story) Morning Glory?,regular,sí,Vinilo,MACUL,DISCOS ALTERNATIVOS
+ART015,29374,Green Day,Toxicity,bueno,no,Vinilo,ÑUÑOA,DISCOS BRITANICOS
+ART016,16944,Coldplay,The Colour and the Shape,excelente,sí,Vinilo,LA FLORIDA,ROCK & ROLL HEAVEN
+ART017,29060,Linkin Park,American Idiot,regular,sí,Vinilo,LA FLORIDA,DISCOS IMPORTADOS
+ART018,24787,Audioslave,Ten,excelente,sí,Vinilo,LA FLORIDA,DISCOS IMPORTADOS
+ART019,15580,System of a Down,Rage Against the Machine,regular,sí,Vinilo,LA FLORIDA,LA TIENDA DEL ROCK
+ART020,24048,Oasis,Rage Against the Machine,regular,no,Vinilo,SANTIAGO CENTRO,DISCOS ALTERNATIVOS
+ART021,34108,Coldplay,Toxicity,excelente,sí,Vinilo,MACUL,PUNK ROCK RECORDS
+ART022,22001,System of a Down,Master of Puppets,bueno,sí,Vinilo,ÑUÑOA,MELODIAS
+ART023,22107,Audioslave,Audioslave,regular,no,Vinilo,LA FLORIDA,LA TIENDA DEL ROCK
+ART024,23824,Linkin Park,Hybrid Theory,excelente,sí,Vinilo,ÑUÑOA,MELODIAS
+ART025,34258,Foo Fighters,Audioslave,regular,no,Vinilo,LAS CONDES,MELODIAS
+ART026,15934,System of a Down,(What's the Story) Morning Glory?,excelente,sí,Vinilo,LA FLORIDA,DISCOS ALTERNATIVOS
+ART027,32931,Coldplay,Audioslave,regular,no,Vinilo,LA REINA,DISCOS IMPORTADOS
+ART028,17583,Linkin Park,American Idiot,bueno,no,Vinilo,LA FLORIDA,MELODIAS
+ART029,21204,Linkin Park,The Colour and the Shape,regular,no,Vinilo,LA REINA,DISCOS IMPORTADOS
+ART030,19538,Rage Against the Machine,Audioslave,bueno,no,Vinilo,SANTIAGO CENTRO,DISCOS IMPORTADOS
+ART031,18356,Oasis,Hybrid Theory,bueno,sí,Vinilo,LA REINA,PUNK ROCK RECORDS
+ART032,19816,Oasis,Rage Against the Machine,bueno,sí,Vinilo,MACUL,DISCOS ALTERNATIVOS
+ART033,30055,Audioslave,Rage Against the Machine,excelente,sí,Vinilo,PROVIDENCIA,METAL MANIA
+ART034,32966,Rage Against the Machine,Parachutes,regular,no,Vinilo,LAS CONDES,LA CUEVA MUSICAL
+ART035,18156,Foo Fighters,American Idiot,bueno,sí,Vinilo,LA REINA,PUNK ROCK RECORDS
+ART036,33589,System of a Down,Parachutes,regular,no,Vinilo,MACUL,LA CUEVA MUSICAL
+ART037,29514,Green Day,Ten,excelente,no,Vinilo,ÑUÑOA,LA CUEVA MUSICAL
+ART038,26165,Audioslave,Parachutes,excelente,sí,Vinilo,SANTIAGO CENTRO,PUNK ROCK RECORDS
+ART039,16238,System of a Down,Hybrid Theory,excelente,sí,Vinilo,PROVIDENCIA,PUNK ROCK RECORDS
+ART040,16601,Foo Fighters,American Idiot,bueno,no,Vinilo,LA FLORIDA,DISCOS ALTERNATIVOS
+ART041,26362,Linkin Park,Toxicity,excelente,no,Vinilo,PROVIDENCIA,ROCK & ROLL HEAVEN
+ART042,27151,Foo Fighters,The Colour and the Shape,bueno,no,Vinilo,ÑUÑOA,PUNK ROCK RECORDS
+ART043,26538,Oasis,Hybrid Theory,regular,sí,Vinilo,MACUL,DISCOS ALTERNATIVOS
+ART044,32679,Audioslave,(What's the Story) Morning Glory?,excelente,no,Vinilo,LA REINA,ROCK & ROLL HEAVEN
+ART045,24631,Oasis,Toxicity,excelente,no,Vinilo,PROVIDENCIA,VINILOS DEL MUNDO
+ART046,19812,Green Day,The Colour and the Shape,regular,no,Vinilo,LAS CONDES,DISCOS IMPORTADOS
+ART047,34637,Pearl Jam,Toxicity,bueno,no,Vinilo,LA REINA,DISCOS IMPORTADOS
+ART048,28723,Linkin Park,American Idiot,regular,no,Vinilo,SANTIAGO CENTRO,DISCOS BRITANICOS
+ART049,28714,Green Day,Ten,regular,no,Vinilo,ÑUÑOA,DISCOS BRITANICOS
+ART050,32039,Pearl Jam,Rage Against the Machine,excelente,no,Vinilo,LAS CONDES,DISCOS ALTERNATIVOS
+ART051,26572,Oasis,Rage Against the Machine,excelente,sí,Vinilo,PROVIDENCIA,DISCOS ALTERNATIVOS
+ART052,19124,Linkin Park,Audioslave,regular,sí,Vinilo,LA REINA,ROCK & ROLL HEAVEN
+ART053,29462,Linkin Park,American Idiot,excelente,sí,Vinilo,LA FLORIDA,ROCK & ROLL HEAVEN
+ART054,27062,System of a Down,Toxicity,bueno,sí,Vinilo,PROVIDENCIA,LA TIENDA DEL ROCK
+ART055,21401,Green Day,Master of Puppets,excelente,sí,Vinilo,LAS CONDES,VINILOS DEL MUNDO
+ART056,32109,Metallica,American Idiot,excelente,no,Vinilo,MACUL,DISCOS IMPORTADOS
+ART057,32840,Linkin Park,Parachutes,regular,no,Vinilo,MACUL,ROCK & ROLL HEAVEN
+ART058,34251,Green Day,Toxicity,regular,sí,Vinilo,ÑUÑOA,PUNK ROCK RECORDS
+ART059,33685,Oasis,Audioslave,excelente,no,Vinilo,MACUL,LA TIENDA DEL ROCK
+ART060,17275,Coldplay,American Idiot,bueno,no,Vinilo,ÑUÑOA,DISCOS IMPORTADOS
+ART061,32534,Pearl Jam,Master of Puppets,bueno,sí,Vinilo,LA REINA,PUNK ROCK RECORDS
+ART062,25713,Foo Fighters,Master of Puppets,excelente,no,Vinilo,MACUL,DISCOS BRITANICOS
+ART063,29906,Linkin Park,The Colour and the Shape,bueno,sí,Vinilo,SANTIAGO CENTRO,DISCOS IMPORTADOS
+ART064,31698,Audioslave,Parachutes,excelente,no,Vinilo,PROVIDENCIA,DISCOS IMPORTADOS
+ART065,34752,Linkin Park,The Colour and the Shape,bueno,no,Vinilo,PROVIDENCIA,DISCOS BRITANICOS
+ART066,16270,Rage Against the Machine,Toxicity,excelente,sí,Vinilo,ÑUÑOA,ROCK & ROLL HEAVEN
+ART067,30053,System of a Down,Parachutes,bueno,sí,Vinilo,ÑUÑOA,DISCOS ALTERNATIVOS
+ART068,26426,Audioslave,Toxicity,bueno,sí,Vinilo,LA FLORIDA,METAL MANIA
+ART069,22441,Audioslave,Rage Against the Machine,bueno,sí,Vinilo,SANTIAGO CENTRO,ROCK & ROLL HEAVEN
+ART070,28811,Audioslave,Toxicity,regular,no,Vinilo,LA REINA,DISCOS BRITANICOS
+ART071,30508,System of a Down,Master of Puppets,bueno,sí,Vinilo,MACUL,DISCOS ALTERNATIVOS
+ART072,22690,Green Day,Parachutes,excelente,sí,Vinilo,ÑUÑOA,ROCK & ROLL HEAVEN
+ART073,22946,Linkin Park,Master of Puppets,excelente,sí,Vinilo,LA FLORIDA,VINILOS DEL MUNDO
+ART074,33426,Foo Fighters,Toxicity,bueno,sí,Vinilo,LA REINA,MELODIAS
+ART075,32086,Audioslave,Audioslave,excelente,sí,Vinilo,LA FLORIDA,DISCOS ALTERNATIVOS
+ART076,28034,Linkin Park,Master of Puppets,regular,no,Vinilo,SANTIAGO CENTRO,DISCOS IMPORTADOS
+ART077,33651,Rage Against the Machine,(What's the Story) Morning Glory?,bueno,sí,Vinilo,ÑUÑOA,DISCOS ALTERNATIVOS
+ART078,34827,Pearl Jam,American Idiot,regular,sí,Vinilo,ÑUÑOA,DISCOS IMPORTADOS
+ART079,19399,Foo Fighters,Ten,bueno,sí,Vinilo,LAS CONDES,PUNK ROCK RECORDS
+ART080,19746,Rage Against the Machine,Toxicity,regular,sí,Vinilo,PROVIDENCIA,ROCK & ROLL HEAVEN
+ART081,17536,Green Day,Audioslave,regular,no,Vinilo,PROVIDENCIA,PUNK ROCK RECORDS
+ART082,22915,Oasis,Master of Puppets,bueno,no,Vinilo,SANTIAGO CENTRO,PUNK ROCK RECORDS
+ART083,15337,Green Day,(What's the Story) Morning Glory?,regular,no,Vinilo,SANTIAGO CENTRO,LA TIENDA DEL ROCK
+ART084,29012,Green Day,Hybrid Theory,regular,sí,Vinilo,LAS CONDES,MELODIAS
+ART085,29620,Pearl Jam,The Colour and the Shape,bueno,sí,Vinilo,MACUL,PUNK ROCK RECORDS
+ART086,23182,Linkin Park,Master of Puppets,regular,no,Vinilo,MACUL,VINILOS DEL MUNDO
+ART087,28339,Audioslave,Hybrid Theory,regular,no,Vinilo,PROVIDENCIA,LA CUEVA MUSICAL
+ART088,19429,Rage Against the Machine,Rage Against the Machine,bueno,sí,Vinilo,LAS CONDES,DISCOS IMPORTADOS
+ART089,32417,Green Day,Audioslave,bueno,no,Vinilo,LA REINA,VINILOS DEL MUNDO
+ART090,21585,Oasis,Rage Against the Machine,excelente,sí,Vinilo,LA FLORIDA,DISCOS BRITANICOS
+ART091,15018,Rage Against the Machine,American Idiot,excelente,sí,Vinilo,SANTIAGO CENTRO,DISCOS ALTERNATIVOS
+ART092,22662,Foo Fighters,Toxicity,bueno,no,Vinilo,LA FLORIDA,LA TIENDA DEL ROCK
+ART093,19057,System of a Down,(What's the Story) Morning Glory?,regular,sí,Vinilo,LA FLORIDA,LA TIENDA DEL ROCK
+ART094,21652,Audioslave,Master of Puppets,regular,no,Vinilo,MACUL,VINILOS DEL MUNDO
+ART095,27843,Pearl Jam,(What's the Story) Morning Glory?,excelente,no,Vinilo,MACUL,ROCK & ROLL HEAVEN
+ART096,26035,Pearl Jam,Ten,excelente,sí,Vinilo,LAS CONDES,VINILOS DEL MUNDO
+ART097,15212,Rage Against the Machine,Ten,bueno,no,Vinilo,LAS CONDES,VINILOS DEL MUNDO
+ART098,23090,Pearl Jam,Audioslave,excelente,sí,Vinilo,LAS CONDES,PUNK ROCK RECORDS
+ART099,34895,Coldplay,Audioslave,regular,no,Vinilo,LAS CONDES,VINILOS DEL MUNDO
+ART100,23945,Metallica,American Idiot,regular,sí,Vinilo,LA FLORIDA,LA TIENDA DEL ROCK
