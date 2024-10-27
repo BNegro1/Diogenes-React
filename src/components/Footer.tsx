@@ -20,11 +20,14 @@ const Footer: React.FC = () => {
                   className="flex items-center justify-center md:justify-start gap-2"
                 >
                   <Disc className="text-white" size={24} />
-                  <span className="text-white text-lg font-bold">Vinyl Records</span>
+                  <span className="text-white text-lg font-bold">Diogenes Discs</span>
                 </motion.div>
               </IonCol>
               <IonCol size="12" sizeMd="4" className="text-center my-4 md:my-0">
-                <p className="text-white text-sm">© 2024 Vinyl Records. Todos los derechos reservados.</p>
+                <p className="text-white text-sm">
+                  © 2024 Diogenes Discs. Todos los derechos reservados. Con 
+                  <a href="https://github.com/BNegro1" className="text-white">Creado por @BNegro1</a>
+                </p>              
               </IonCol>
               <IonCol size="12" sizeMd="4" className="flex justify-center md:justify-end gap-4">
                 <motion.a

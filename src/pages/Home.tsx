@@ -6,7 +6,6 @@ import SearchFilter from '../components/SearchFilter';
 import RecordTable from '../components/RecordTable';
 import { useStore } from '../store/useStore';
 import { VinylRecord } from '../types/Record';
-
 const Home: React.FC = () => {
   const records = useStore((state) => state.records);
   const [filteredRecords, setFilteredRecords] = useState<VinylRecord[]>([]);
@@ -27,7 +26,7 @@ const Home: React.FC = () => {
   };
 
   return (
-    <Layout title="Vinyl Records">
+    <Layout title="Diogenes Discs">
       <IonContent>
         <motion.div
           initial={{ opacity: 0 }}
