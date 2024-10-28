@@ -3,12 +3,24 @@ import { IonButton, IonIcon, IonText, IonSpinner, IonToast } from '@ionic/react'
 import { cloudUpload } from 'ionicons/icons';
 import { read, utils } from 'xlsx';
 import { motion } from 'framer-motion';
-import { VinylRecord } from '../types/Record';
+import { VinylRecord, RawExcelRecord } from '../types/Record';
 import { insertRecords } from '../db';
 
 interface FileUploadProps {
   onUpload: (records: VinylRecord[]) => void;
 }
+
+const REQUIRED_HEADERS = [
+  'CODIGO',
+  'PRECIO',
+  'ARTISTA',
+  'ALBUM',
+  'ESTADO',
+  'INSERTO_POSTER',
+  'FORMATO',
+  'COMUNA',
+  'CONTACTO',
+] as const;
 
 const FileUpload: React.FC<FileUploadProps> = ({ onUpload }) => {
   const fileInputRef = useRef<HTMLInputElement>(null);
@@ -16,31 +28,25 @@ const FileUpload: React.FC<FileUploadProps> = ({ onUpload }) => {
   const [error, setError] = useState<string | null>(null);
   const [showSuccess, setShowSuccess] = useState(false);
 
-  const validateHeaders = (headers: string[]) => {
-    const requiredHeaders = [
-      'CODIGO',
-      'PRECIO',
-      'ARTISTA',
-      'ALBUM',
-      'ESTADO',
-      'INSERTO_POSTER',
-      'FORMATO',
-      'COMUNA',
-      'CONTACTO',
-    ];
-
-    return requiredHeaders.every((header) => headers.includes(header));
+  const validateHeaders = (headers: string[]): boolean => {
+    return REQUIRED_HEADERS.every((header) => headers.includes(header));
   };
 
-  const processRecords = (rawRecords: any[]): VinylRecord[] => {
+  const processRecords = (rawRecords: RawExcelRecord[]): VinylRecord[] => {
     return rawRecords.map(record => ({
-      ...record,
+      CODIGO: String(record.CODIGO),
       PRECIO: Number(record.PRECIO),
-      INSERTO_POSTER: record.INSERTO_POSTER || '',
+      ARTISTA: String(record.ARTISTA),
+      ALBUM: String(record.ALBUM),
+      ESTADO: String(record.ESTADO),
+      INSERTO_POSTER: String(record.INSERTO_POSTER || ''),
+      FORMATO: String(record.FORMATO),
+      COMUNA: String(record.COMUNA),
+      CONTACTO: String(record.CONTACTO)
     }));
   };
 
-  const handleFileUpload = async (event: React.ChangeEvent<HTMLInputElement>) => {
+  const handleFileUpload = (event: React.ChangeEvent<HTMLInputElement>) => {
     const file = event.target.files?.[0];
     if (!file) return;
 
@@ -61,7 +67,7 @@ const FileUpload: React.FC<FileUploadProps> = ({ onUpload }) => {
           return;
         }
 
-        const rawRecords = utils.sheet_to_json(worksheet);
+        const rawRecords = utils.sheet_to_json<RawExcelRecord>(worksheet);
         const records = processRecords(rawRecords);
 
         try {
@@ -135,8 +141,7 @@ const FileUpload: React.FC<FileUploadProps> = ({ onUpload }) => {
         <p>Formatos soportados: .xlsx, .xls</p>
         <p className="mt-2">Columnas requeridas:</p>
         <code className="block mt-1 text-xs bg-gray-100 p-2 rounded">
-          CODIGO, PRECIO, ARTISTA, ALBUM, ESTADO, INSERTO_POSTER, FORMATO,
-          COMUNA, CONTACTO
+          {REQUIRED_HEADERS.join(', ')}
         </code>
       </IonText>
 

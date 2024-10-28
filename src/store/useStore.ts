@@ -7,8 +7,8 @@ interface Store {
   user: User | null;
   setRecords: (records: VinylRecord[]) => void;
   setUser: (user: User | null) => void;
-  searchRecordsFromDb: (artist?: string, album?: string) => void;
-  loadAllRecords: () => void;
+  searchRecordsFromDb: (artist?: string, album?: string) => Promise<void>;
+  loadAllRecords: () => Promise<void>;
 }
 
 export const useStore = create<Store>((set) => ({
@@ -16,12 +16,12 @@ export const useStore = create<Store>((set) => ({
   user: null,
   setRecords: (records) => set({ records }),
   setUser: (user) => set({ user }),
-  searchRecordsFromDb: (artist = '', album = '') => {
-    const records = searchRecords(artist, album);
+  searchRecordsFromDb: async (artist = '', album = '') => {
+    const records = await searchRecords(artist, album);
     set({ records });
   },
-  loadAllRecords: () => {
-    const records = getAllRecords();
+  loadAllRecords: async () => {
+    const records = await getAllRecords();
     set({ records });
   },
 }));

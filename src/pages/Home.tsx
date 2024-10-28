@@ -1,29 +1,20 @@
-import React, { useState } from 'react';
+import React, { useEffect } from 'react';
 import { IonContent, IonCard, IonCardContent } from '@ionic/react';
 import { motion } from 'framer-motion';
 import Layout from '../components/Layout';
 import SearchFilter from '../components/SearchFilter';
 import RecordTable from '../components/RecordTable';
 import { useStore } from '../store/useStore';
-import { VinylRecord } from '../types/Record';
 
 const Home: React.FC = () => {
-  const records = useStore((state) => state.records);
-  const [filteredRecords, setFilteredRecords] = useState<VinylRecord[]>([]);
-  const [hasSearched, setHasSearched] = useState(false);
+  const { records, loadAllRecords, searchRecordsFromDb } = useStore();
+
+  useEffect(() => {
+    loadAllRecords();
+  }, [loadAllRecords]);
 
   const handleSearch = (artist: string, album: string) => {
-    const filtered = records.filter((record) => {
-      const matchArtist = artist
-        ? record.ARTISTA.toLowerCase().includes(artist.toLowerCase())
-        : true;
-      const matchAlbum = album
-        ? record.ALBUM.toLowerCase().includes(album.toLowerCase())
-        : true;
-      return matchArtist && matchAlbum;
-    });
-    setFilteredRecords(filtered);
-    setHasSearched(true);
+    searchRecordsFromDb(artist, album);
   };
 
   return (
@@ -63,11 +54,9 @@ const Home: React.FC = () => {
           <IonCard>
             <IonCardContent>
               <SearchFilter onSearch={handleSearch} />
-              {hasSearched && (
-                <div className="mt-6">
-                  <RecordTable records={filteredRecords} />
-                </div>
-              )}
+              <div className="mt-6">
+                <RecordTable records={records} />
+              </div>
             </IonCardContent>
           </IonCard>
         </div>

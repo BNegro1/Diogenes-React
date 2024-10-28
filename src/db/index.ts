@@ -1,40 +1,75 @@
-import Database from 'better-sqlite3';
 import { VinylRecord } from '../types/Record';
 
-const db = new Database('data/records.db');
+const DB_NAME = 'vinylRecordsDB';
+const STORE_NAME = 'records';
+const DB_VERSION = 1;
 
-export const insertRecords = (records: VinylRecord[]) => {
-    const insert = db.prepare(`
-    INSERT INTO records (
-      codigo, precio, artista, album, estado,
-      inserto_poster, formato, comuna, contacto
-    ) VALUES (
-      @CODIGO, @PRECIO, @ARTISTA, @ALBUM, @ESTADO,
-      @INSERTO_POSTER, @FORMATO, @COMUNA, @CONTACTO
-    )
-  `);
+const openDB = (): Promise<IDBDatabase> => {
+    return new Promise((resolve, reject) => {
+        const request = indexedDB.open(DB_NAME, DB_VERSION);
 
-    const insertMany = db.transaction((records) => {
-        for (const record of records) {
-            insert.run(record);
-        }
+        request.onerror = () => reject(request.error);
+        request.onsuccess = () => resolve(request.result);
+
+        request.onupgradeneeded = (event) => {
+            const db = (event.target as IDBOpenDBRequest).result;
+            if (!db.objectStoreNames.contains(STORE_NAME)) {
+                db.createObjectStore(STORE_NAME, { keyPath: 'id', autoIncrement: true });
+            }
+        };
+    });
+};
+
+export const insertRecords = async (records: VinylRecord[]): Promise<void> => {
+    const db = await openDB();
+    const transaction = db.transaction(STORE_NAME, 'readwrite');
+    const store = transaction.objectStore(STORE_NAME);
+
+    // Clear existing records
+    await new Promise<void>((resolve, reject) => {
+        const clearRequest = store.clear();
+        clearRequest.onsuccess = () => resolve();
+        clearRequest.onerror = () => reject(clearRequest.error);
     });
 
-    insertMany(records);
+    // Insert new records
+    for (const record of records) {
+        await new Promise<void>((resolve, reject) => {
+            const request = store.add(record);
+            request.onsuccess = () => resolve();
+            request.onerror = () => reject(request.error);
+        });
+    }
 };
 
-export const searchRecords = (artist: string = '', album: string = '') => {
-    const query = db.prepare(`
-    SELECT * FROM records
-    WHERE (@artist = '' OR artista LIKE '%' || @artist || '%')
-    AND (@album = '' OR album LIKE '%' || @album || '%')
-    ORDER BY created_at DESC
-  `);
+export const searchRecords = async (artist: string = '', album: string = ''): Promise<VinylRecord[]> => {
+    const db = await openDB();
+    const transaction = db.transaction(STORE_NAME, 'readonly');
+    const store = transaction.objectStore(STORE_NAME);
 
-    return query.all({ artist, album }) as VinylRecord[];
+    return new Promise((resolve, reject) => {
+        const request = store.getAll();
+        request.onerror = () => reject(request.error);
+        request.onsuccess = () => {
+            const records = request.result as VinylRecord[];
+            const filteredRecords = records.filter(record => {
+                const matchArtist = !artist || record.ARTISTA.toLowerCase().includes(artist.toLowerCase());
+                const matchAlbum = !album || record.ALBUM.toLowerCase().includes(album.toLowerCase());
+                return matchArtist && matchAlbum;
+            });
+            resolve(filteredRecords);
+        };
+    });
 };
 
-export const getAllRecords = () => {
-    const query = db.prepare('SELECT * FROM records ORDER BY created_at DESC');
-    return query.all() as VinylRecord[];
-}; 
+export const getAllRecords = async (): Promise<VinylRecord[]> => {
+    const db = await openDB();
+    const transaction = db.transaction(STORE_NAME, 'readonly');
+    const store = transaction.objectStore(STORE_NAME);
+
+    return new Promise((resolve, reject) => {
+        const request = store.getAll();
+        request.onerror = () => reject(request.error);
+        request.onsuccess = () => resolve(request.result as VinylRecord[]);
+    });
+};

@@ -1,0 +1,52 @@
+└── d:/Repositorios/Diogenes-React-Folder-Oficial/
+    ├── .gitignore
+    ├── .npmrc
+    ├── .nvmrc
+    ├── .vercel/
+    │   ├── project.json
+    │   └── README.txt
+    ├── build.sh
+    ├── data/
+    ├── deployComandos.txt
+    ├─] dist/ (ignored)
+    ├── eslint.config.js
+    ├── index.html
+    ├── MEJORA RENDIMIENTO VSC.txt
+    ├─] node_modules/ (ignored)
+    ├── package-lock.json
+    ├── package.json
+    ├── postcss.config.js
+    ├── scripts/
+    │   └── setupDb.js
+    ├── src/
+    │   ├── App.tsx
+    │   ├── components/
+    │   │   ├── FileUpload.tsx
+    │   │   ├── Footer.tsx
+    │   │   ├── Layout.tsx
+    │   │   ├── RecordTable.tsx
+    │   │   └── SearchFilter.tsx
+    │   ├── db/
+    │   │   └── index.ts
+    │   ├── index.css
+    │   ├── main.tsx
+    │   ├── pages/
+    │   │   ├── Catalog.tsx
+    │   │   ├── Home.tsx
+    │   │   ├── Manager.tsx
+    │   │   └── txs.txt
+    │   ├── store/
+    │   │   └── useStore.ts
+    │   ├── testeo_100.csv
+    │   ├── testeo_100.xlsx
+    │   ├── theme/
+    │   │   └── variables.css
+    │   ├── types/
+    │   │   └── Record.ts
+    │   └── vite-env.d.ts
+    ├── tailwind.config.js
+    ├── tsconfig.app.json
+    ├── tsconfig.json
+    ├── tsconfig.node.json
+    ├── vercel.json
+    └── vite.config.ts
