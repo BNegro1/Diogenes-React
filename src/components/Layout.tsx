@@ -39,7 +39,7 @@ const Layout: React.FC<LayoutProps> = ({ children, title }) => {
           </IonButtons>
         </IonToolbar>
       </IonHeader>
-      <IonContent>
+      <IonContent className="p-4 md:p-8 lg:p-12">
         {children}
       </IonContent>
       <Footer />

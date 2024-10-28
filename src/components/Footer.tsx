@@ -36,14 +36,14 @@ const Footer: React.FC = () => {
                   </span>
                 </motion.div>
               </IonCol>
-              <IonCol size="12" sizeMd="4" className="text-center my-4 md:my-0">
-                <p className="text-white text-sm">
-                  © 2024 Diogenes Discs. Todos los derechos reservados. Con
-                  <a href="https://github.com/BNegro1" className="text-white">
-                    Creado por @BNegro1
-                  </a>
-                </p>
-              </IonCol>
+                <IonCol size="12" sizeMd="" className="text-center my-4 md:my-0">
+                  <p className="text-white text-sm">
+                    © 2024 Diogenes Discs. Todos los derechos reservados.
+                    <a href="https://github.com/BNegro1" className="text-white">
+                      Creado por @BNegro1
+                    </a>
+                  </p>
+                </IonCol>
               <IonCol
                 size="12"
                 sizeMd="4"

@@ -8,6 +8,9 @@ import {
   IonInput,
   IonButton,
   IonAlert,
+  IonGrid,
+  IonRow,
+  IonCol,
 } from '@ionic/react';
 import { motion } from 'framer-motion';
 import Layout from '../components/Layout';
@@ -51,49 +54,60 @@ const Manager: React.FC = () => {
   return (
     <Layout title="Manager">
       <IonContent>
-        <motion.div>
-          {isAuthenticated ? (
-            records.length > 0 ? (
-              <IonCard>
-                <IonCardContent>
-                  <h2 className="text-2xl font-bold mb-4">Cargar Registros</h2>
-                  <FileUpload onUpload={handleFileUpload} />
-                  <IonButton onClick={handleUpload}>Upload Records</IonButton>
-                </IonCardContent>
-              </IonCard>
-            ) : (
-              <IonCard>
-                <IonCardContent>
-                  <h2 className="text-2xl font-bold mb-4">Cargar Registros</h2>
-                  <FileUpload onUpload={handleFileUpload} />
-                </IonCardContent>
-              </IonCard>
-            )
-          ) : (
-            <IonCard>
-              <IonCardContent>
-                <h2 className="text-2xl font-bold mb-4">Admin Login</h2>
-                <IonItem>
-                  <IonLabel position="floating">Email</IonLabel>
-                  <IonInput
-                    value={email}
-                    onIonChange={(e) => setEmail(e.detail.value!)}
-                    type="email"
-                  />
-                </IonItem>
-                <IonItem>
-                  <IonLabel position="floating">Password</IonLabel>
-                  <IonInput
-                    value={password}
-                    onIonChange={(e) => setPassword(e.detail.value!)}
-                    type="password"
-                  />
-                </IonItem>
-                <IonButton onClick={handleLogin}>Login as Admin</IonButton>
-              </IonCardContent>
-            </IonCard>
-          )}
-        </motion.div>
+        <IonGrid fixed>
+          <IonRow>
+            <IonCol size="12" sizeMd="8" offsetMd="2" sizeLg="6" offsetLg="3">
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.5 }}
+              >
+                <IonCard className="ion-margin">
+                  <IonCardContent>
+                    {isAuthenticated ? (
+                      <>
+                        <h2 className="text-xl sm:text-2xl font-bold mb-4">Cargar Registros</h2>
+                        <FileUpload onUpload={handleFileUpload} />
+                        {records.length > 0 && (
+                          <div className="mt-4">
+                            <IonButton expand="block" onClick={handleUpload}>
+                              Upload Records
+                            </IonButton>
+                          </div>
+                        )}
+                      </>
+                    ) : (
+                      <>
+                        <h2 className="text-xl sm:text-2xl font-bold mb-4">Admin Login</h2>
+                        <div className="space-y-4">
+                          <IonItem>
+                            <IonLabel position="floating">Email</IonLabel>
+                            <IonInput
+                              value={email}
+                              onIonChange={(e) => setEmail(e.detail.value!)}
+                              type="email"
+                            />
+                          </IonItem>
+                          <IonItem>
+                            <IonLabel position="floating">Password</IonLabel>
+                            <IonInput
+                              value={password}
+                              onIonChange={(e) => setPassword(e.detail.value!)}
+                              type="password"
+                            />
+                          </IonItem>
+                          <IonButton expand="block" onClick={handleLogin}>
+                            Login as Admin
+                          </IonButton>
+                        </div>
+                      </>
+                    )}
+                  </IonCardContent>
+                </IonCard>
+              </motion.div>
+            </IonCol>
+          </IonRow>
+        </IonGrid>
 
         <IonAlert
           isOpen={showError}
