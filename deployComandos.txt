@@ -26,6 +26,12 @@ vercel login
 # 7. Despliega a producción
 vercel --prod
 
+# Buildear 
+npm run build
+# Desplegar a Vercel (--prod)
+vercel --prod
+
+
 
 
 Recuerda:

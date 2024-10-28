@@ -46,7 +46,7 @@ const FileUpload: React.FC<FileUploadProps> = ({ onUpload }) => {
     }));
   };
 
-  const handleFileUpload = (event: React.ChangeEvent<HTMLInputElement>) => {
+  const handleFileUpload = async (event: React.ChangeEvent<HTMLInputElement>) => {
     const file = event.target.files?.[0];
     if (!file) return;
 
@@ -54,7 +54,7 @@ const FileUpload: React.FC<FileUploadProps> = ({ onUpload }) => {
     setError(null);
 
     const reader = new FileReader();
-    reader.onload = (e) => {
+    reader.onload = async (e) => {
       try {
         const data = new Uint8Array(e.target?.result as ArrayBuffer);
         const workbook = read(data, { type: 'array' });
@@ -71,7 +71,7 @@ const FileUpload: React.FC<FileUploadProps> = ({ onUpload }) => {
         const records = processRecords(rawRecords);
 
         try {
-          insertRecords(records);
+          await insertRecords(records);
           onUpload(records);
           setShowSuccess(true);
           if (fileInputRef.current) {

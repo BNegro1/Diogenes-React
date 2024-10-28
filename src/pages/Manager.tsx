@@ -12,70 +12,84 @@ import {
 import { motion } from 'framer-motion';
 import Layout from '../components/Layout';
 import FileUpload from '../components/FileUpload';
-import { useStore } from '../store/useStore';
+import { getAuth, signInWithEmailAndPassword } from 'firebase/auth';
+import { insertRecords } from '../db';
+import { VinylRecord } from '../types/Record';
 
 const Manager: React.FC = () => {
+  const [records, setRecords] = useState<VinylRecord[]>([]);
+  const [showError, setShowError] = useState(false);
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [showError, setShowError] = useState(false);
-  const { user, setUser, setRecords } = useStore();
 
-  const handleLogin = () => {
-    // Simple validation for demo purposes
-    if (email === 'admin@example.com' && password === 'admin123') {
-      setUser({ email, isAuthenticated: true });
-    } else {
+  const handleFileUpload = (uploadedRecords: VinylRecord[]) => {
+    setRecords(uploadedRecords);
+  };
+
+  const handleUpload = async () => {
+    try {
+      await insertRecords(records);
+      alert('Records inserted successfully');
+    } catch (error) {
+      console.error('Error uploading records:', error);
+      alert('Failed to insert records');
+    }
+  };
+
+  const handleLogin = async () => {
+    const auth = getAuth();
+    try {
+      await signInWithEmailAndPassword(auth, email, password);
+      setIsAuthenticated(true);
+    } catch (error) {
+      console.error('Error authenticating admin:', error);
       setShowError(true);
     }
   };
 
-  const handleFileUpload = (records: any[]) => {
-    setRecords(records);
-  };
-
   return (
-    <Layout title="Administrador">
+    <Layout title="Manager">
       <IonContent>
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5 }}
-          className="p-4"
-        >
-          {!user?.isAuthenticated ? (
-            <IonCard>
-              <IonCardContent>
-                <h2 className="text-2xl font-bold mb-4">Iniciar Sesión</h2>
-                <IonItem>
-                  <IonLabel position="floating">Email</IonLabel>
-                  <IonInput
-                    type="email"
-                    value={email}
-                    onIonChange={e => setEmail(e.detail.value!)}
-                  />
-                </IonItem>
-                <IonItem>
-                  <IonLabel position="floating">Contraseña</IonLabel>
-                  <IonInput
-                    type="password"
-                    value={password}
-                    onIonChange={e => setPassword(e.detail.value!)}
-                  />
-                </IonItem>
-                <IonButton
-                  expand="block"
-                  className="mt-4"
-                  onClick={handleLogin}
-                >
-                  Iniciar Sesión
-                </IonButton>
-              </IonCardContent>
-            </IonCard>
+        <motion.div>
+          {isAuthenticated ? (
+            records.length > 0 ? (
+              <IonCard>
+                <IonCardContent>
+                  <h2 className="text-2xl font-bold mb-4">Cargar Registros</h2>
+                  <FileUpload onUpload={handleFileUpload} />
+                  <IonButton onClick={handleUpload}>Upload Records</IonButton>
+                </IonCardContent>
+              </IonCard>
+            ) : (
+              <IonCard>
+                <IonCardContent>
+                  <h2 className="text-2xl font-bold mb-4">Cargar Registros</h2>
+                  <FileUpload onUpload={handleFileUpload} />
+                </IonCardContent>
+              </IonCard>
+            )
           ) : (
             <IonCard>
               <IonCardContent>
-                <h2 className="text-2xl font-bold mb-4">Cargar Registros</h2>
-                <FileUpload onUpload={handleFileUpload} />
+                <h2 className="text-2xl font-bold mb-4">Admin Login</h2>
+                <IonItem>
+                  <IonLabel position="floating">Email</IonLabel>
+                  <IonInput
+                    value={email}
+                    onIonChange={(e) => setEmail(e.detail.value!)}
+                    type="email"
+                  />
+                </IonItem>
+                <IonItem>
+                  <IonLabel position="floating">Password</IonLabel>
+                  <IonInput
+                    value={password}
+                    onIonChange={(e) => setPassword(e.detail.value!)}
+                    type="password"
+                  />
+                </IonItem>
+                <IonButton onClick={handleLogin}>Login as Admin</IonButton>
               </IonCardContent>
             </IonCard>
           )}
