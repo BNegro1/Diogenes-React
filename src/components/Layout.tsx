@@ -30,9 +30,6 @@ const Layout: React.FC<LayoutProps> = ({ children, title }) => {
             <IonButton onClick={() => history.push('/home')}>
               <IonIcon icon={home} />
             </IonButton>
-            <IonButton onClick={() => history.push('/catalog')}>
-              <IonIcon icon={library} />
-            </IonButton>
             <IonButton onClick={() => history.push('/manager')}>
               <IonIcon icon={settings} />
             </IonButton>

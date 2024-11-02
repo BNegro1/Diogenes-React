@@ -19,16 +19,16 @@ const Footer: React.FC = () => {
         transition={{ duration: 0.5 }}
       >
         <IonToolbar color="primary" className="px-4 py-6">
-          <IonGrid>
-            <IonRow className="ion-align-items-center">
+          <IonGrid className="max-w-7xl mx-auto">
+            <IonRow className="ion-align-items-center flex flex-col sm:flex-row">
               <IonCol
                 size="12"
-                sizeMd="4"
-                className="text-center ion-text-md-start"
+                sizeSm="4"
+                className="text-center sm:text-left mb-4 sm:mb-0"
               >
                 <motion.div
                   whileHover={{ scale: 1.05 }}
-                  className="flex items-center justify-center md:justify-start gap-2"
+                  className="flex items-center justify-center sm:justify-start gap-2"
                 >
                   <Disc className="text-white" size={24} />
                   <span className="text-white text-lg font-bold">
@@ -36,18 +36,20 @@ const Footer: React.FC = () => {
                   </span>
                 </motion.div>
               </IonCol>
-                <IonCol size="12" sizeMd="" className="text-center my-4 md:my-0">
-                  <p className="text-white text-sm">
-                    © 2024 Diogenes Discs. Todos los derechos reservados.
-                    <a href="https://github.com/BNegro1" className="text-white">
-                      Creado por @BNegro1
-                    </a>
-                  </p>
-                </IonCol>
+              <IonCol 
+                size="12" 
+                sizeSm="4" 
+                className="text-center mb-4 sm:mb-0"
+              >
+                <p className="text-white text-sm">
+                  © 2024 Diogenes Discs - Todos los derechos reservados.
+                  <span className="sr-only">Desarrollado por @BNegro1 - https://github.com/BNegro1</span>
+                </p>
+              </IonCol>
               <IonCol
                 size="12"
-                sizeMd="4"
-                className="flex justify-center md:justify-end gap-4"
+                sizeSm="4"
+                className="flex justify-center sm:justify-end gap-4"
               >
                 <motion.a
                   whileHover={{ scale: 1.2, rotate: 5 }}

@@ -27,6 +27,10 @@ const Home: React.FC = () => {
   return (
     <Layout title="Diogenes Discs">
       <IonContent>
+        {/* Desarrollado por @BNegro1 - https://github.com/BNegro1 */}
+        {/* © 2024 Diogenes Discs - Todos los derechos reservados. */}
+        {/* Página diseñada en colaboración con Diogenes Discs */}
+
         <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
@@ -37,7 +41,7 @@ const Home: React.FC = () => {
             className="h-[40vh] md:h-[50vh] bg-cover bg-center relative"
             style={{
               backgroundImage:
-                'url("https://images.unsplash.com/photo-1461360228754-6e81c478b882?ixlib=rb-1.2.1&auto=format&fit=crop&w=1920&q=80")',
+                'url("img/hero.jpg")',
             }}
           >
             <div className="absolute inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4">
@@ -58,13 +62,20 @@ const Home: React.FC = () => {
           </div>
         </motion.div>
 
-        <IonGrid fixed>
+        <IonGrid className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <IonRow>
-            <IonCol size="12" sizeMd="10" offsetMd="1">
-              <IonCard className="ion-margin">
-                <IonCardContent>
+            <IonCol 
+              size="12" 
+              sizeSm="12" 
+              sizeMd="10" 
+              sizeLg="8" 
+              offsetMd="1" 
+              offsetLg="2"
+            >
+              <IonCard className="ion-margin-vertical">
+                <IonCardContent className="p-4 sm:p-6">
                   <SearchFilter onSearch={handleSearch} />
-                  <div className="mt-6">
+                  <div className="mt-4 sm:mt-6">
                     <RecordTable records={records} />
                   </div>
                 </IonCardContent>
