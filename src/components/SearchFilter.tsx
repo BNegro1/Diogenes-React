@@ -1,13 +1,11 @@
 import React, { useState } from 'react';
 import {
-  IonSearchbar,
   IonItem,
   IonLabel,
   IonInput,
   IonButton,
   IonAlert,
 } from '@ionic/react';
-import { motion } from 'framer-motion';
 
 interface SearchFilterProps {
   onSearch: (artist: string, album: string) => void;
@@ -27,12 +25,7 @@ const SearchFilter: React.FC<SearchFilterProps> = ({ onSearch }) => {
   };
 
   return (
-    <motion.div
-      initial={{ opacity: 0, y: 20 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.5 }}
-      className="p-4"
-    >
+    <>
       <IonItem>
         <IonLabel position="floating">Artista</IonLabel>
         <IonInput
@@ -49,7 +42,11 @@ const SearchFilter: React.FC<SearchFilterProps> = ({ onSearch }) => {
           className="mt-2"
         />
       </IonItem>
-      <IonButton expand="block" className="mt-4" onClick={handleSearch}>
+      <IonButton
+        className="bg-[var(--gradient-primary)] hover:opacity-90 transition-opacity"
+        expand="block"
+        onClick={handleSearch}
+      >
         Buscar
       </IonButton>
 
@@ -60,7 +57,7 @@ const SearchFilter: React.FC<SearchFilterProps> = ({ onSearch }) => {
         message="Por favor, ingrese al menos un criterio de búsqueda (artista o álbum)."
         buttons={['OK']}
       />
-    </motion.div>
+    </>
   );
 };
 

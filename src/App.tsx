@@ -13,7 +13,9 @@ import '@ionic/react/css/typography.css';
 import './theme/variables.css';
 import './index.css';
 
-setupIonicReact();
+setupIonicReact({
+  mode: 'md'
+});
 
 const App: React.FC = () => {
   useEffect(() => {

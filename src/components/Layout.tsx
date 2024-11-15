@@ -9,9 +9,8 @@ import {
   IonIcon,
   IonPage,
 } from '@ionic/react';
-import { home, library, settings } from 'ionicons/icons';
+import { home, settings } from 'ionicons/icons';
 import { useHistory } from 'react-router-dom';
-import Footer from './Footer';
 
 interface LayoutProps {
   children: React.ReactNode;
@@ -23,23 +22,29 @@ const Layout: React.FC<LayoutProps> = ({ children, title }) => {
 
   return (
     <IonPage>
-      <IonHeader>
-        <IonToolbar color="primary">
-          <IonTitle>{title}</IonTitle>
+      <IonHeader className="ion-no-border">
+        <IonToolbar className="bg-gradient-to-r from-[#1a1a1a] to-[#313131] shadow-md">
+          <IonTitle className="text-gray-100 font-semibold">{title}</IonTitle>
           <IonButtons slot="end">
-            <IonButton onClick={() => history.push('/home')}>
-              <IonIcon icon={home} />
+            <IonButton 
+              className="text-gray-200 hover:text-white transition-colors" 
+              onClick={() => history.push('/')}
+            >
+              <IonIcon icon={home} className="w-5 h-5" />
             </IonButton>
-            <IonButton onClick={() => history.push('/manager')}>
-              <IonIcon icon={settings} />
+            <IonButton 
+              className="text-gray-200 hover:text-white transition-colors" 
+              onClick={() => history.push('/manager')}
+            >
+              <IonIcon icon={settings} className="w-5 h-5" />
             </IonButton>
           </IonButtons>
         </IonToolbar>
       </IonHeader>
-      <IonContent className="p-4 md:p-8 lg:p-12">
+
+      <IonContent className="bg-[#f5f5f5]">
         {children}
       </IonContent>
-      <Footer />
     </IonPage>
   );
 };

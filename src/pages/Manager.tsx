@@ -52,7 +52,7 @@ const Manager: React.FC = () => {
   };
 
   return (
-    <Layout title="Manager">
+    <Layout title="Administración">
       <IonContent>
         <IonGrid fixed>
           <IonRow>
@@ -71,14 +71,14 @@ const Manager: React.FC = () => {
                         {records.length > 0 && (
                           <div className="mt-4">
                             <IonButton expand="block" onClick={handleUpload}>
-                              Upload Records
+                              Actualizar vinilos
                             </IonButton>
                           </div>
                         )}
                       </>
                     ) : (
                       <>
-                        <h2 className="text-xl sm:text-2xl font-bold mb-4">Admin Login</h2>
+                        <h2 className="text-xl sm:text-2xl font-bold mb-4">Ingreso</h2>
                         <div className="space-y-4">
                           <IonItem>
                             <IonLabel position="floating">Email</IonLabel>
@@ -89,7 +89,7 @@ const Manager: React.FC = () => {
                             />
                           </IonItem>
                           <IonItem>
-                            <IonLabel position="floating">Password</IonLabel>
+                            <IonLabel position="floating">Contraseña</IonLabel>
                             <IonInput
                               value={password}
                               onIonChange={(e) => setPassword(e.detail.value!)}
@@ -97,7 +97,7 @@ const Manager: React.FC = () => {
                             />
                           </IonItem>
                           <IonButton expand="block" onClick={handleLogin}>
-                            Login as Admin
+                            Entrar como administrador
                           </IonButton>
                         </div>
                       </>

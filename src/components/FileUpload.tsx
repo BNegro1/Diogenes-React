@@ -2,7 +2,6 @@ import React, { useRef, useState } from 'react';
 import { IonButton, IonIcon, IonText, IonSpinner, IonToast } from '@ionic/react';
 import { cloudUpload } from 'ionicons/icons';
 import { read, utils } from 'xlsx';
-import { motion } from 'framer-motion';
 import { VinylRecord, RawExcelRecord } from '../types/Record';
 import { insertRecords } from '../db';
 
@@ -98,11 +97,7 @@ const FileUpload: React.FC<FileUploadProps> = ({ onUpload }) => {
   };
 
   return (
-    <motion.div
-      initial={{ opacity: 0, y: 20 }}
-      animate={{ opacity: 1, y: 0 }}
-      className="flex flex-col items-center p-4"
-    >
+    <div className="flex flex-col items-center p-4">
       <input
         type="file"
         ref={fileInputRef}
@@ -110,7 +105,7 @@ const FileUpload: React.FC<FileUploadProps> = ({ onUpload }) => {
         accept=".xlsx,.xls"
         className="hidden"
       />
-      <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
+      <div>
         <IonButton
           onClick={() => fileInputRef.current?.click()}
           className="w-full max-w-xs"
@@ -125,16 +120,12 @@ const FileUpload: React.FC<FileUploadProps> = ({ onUpload }) => {
             </>
           )}
         </IonButton>
-      </motion.div>
+      </div>
 
       {error && (
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          className="mt-4 text-red-500 text-sm"
-        >
+        <div className="mt-4 text-red-500 text-sm">
           {error}
-        </motion.div>
+        </div>
       )}
 
       <IonText color="medium" className="mt-4 text-sm">
@@ -153,7 +144,7 @@ const FileUpload: React.FC<FileUploadProps> = ({ onUpload }) => {
         position="bottom"
         color="success"
       />
-    </motion.div>
+    </div>
   );
 };
 
