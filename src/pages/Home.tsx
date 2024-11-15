@@ -11,6 +11,7 @@ import Layout from '../components/Layout';
 import SearchFilter from '../components/SearchFilter';
 import RecordTable from '../components/RecordTable';
 import { useStore } from '../store/useStore';
+import heroImage from '@/assets/img/hero.jpg';
 
 const Home: React.FC = () => {
   const { records, loadAllRecords, searchRecordsFromDb } = useStore();
@@ -29,8 +30,8 @@ const Home: React.FC = () => {
         <div className="relative">
           <div className="absolute inset-0">
             <img 
-              src="/img/hero.jpg" 
-              alt="Hero background" 
+              src={heroImage}
+              alt="Portada" 
               className="h-full w-full object-cover filter blur-sm"
             />
           </div>
