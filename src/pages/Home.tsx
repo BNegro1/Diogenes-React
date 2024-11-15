@@ -28,13 +28,10 @@ const Home: React.FC = () => {
       <IonContent>
         <div className="relative">
           <div className="absolute inset-0">
-            <div
-              className="h-full w-full bg-cover bg-center"
-              style={{
-                backgroundImage:
-                  'url("img/hero.jpg")',
-                filter: 'blur(4px)',
-              }}
+            <img 
+              src="/img/hero.jpg" 
+              alt="Hero background" 
+              className="h-full w-full object-cover filter blur-sm"
             />
           </div>
           <div className="h-[40vh] md:h-[50vh] relative">
