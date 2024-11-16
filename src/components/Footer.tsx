@@ -13,7 +13,7 @@ const Footer: React.FC = () => {
     <IonFooter>
       <div>
         {/* Ajustamos el toolbar para hacerlo más compacto */}
-        <IonToolbar color="primary" className="px-4 py-4 md:py-6">
+        <IonToolbar className="px-4 py-4 md:py-6">
           <IonGrid className="max-w-7xl mx-auto">
             {/* Ajuste para dispositivos móviles */}
             <IonRow className="ion-align-items-center flex flex-col md:flex-row gap-4">

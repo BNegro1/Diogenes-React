@@ -46,12 +46,16 @@ const RecordTable: React.FC<RecordTableProps> = ({ records }) => {
     <div className="overflow-x-auto space-y-4">
       {/* Controles de paginación */}
       <div className="flex flex-col md:flex-row justify-between items-center mb-4">
-        <div className="flex items-center gap-2">
+        <div className="flex items-center gap-2" style={{ color: 'var(--ion-text-color)' }}>
           <span className="text-sm">Registros por página:</span>
           <IonSelect
             value={itemsPerPage}
             onIonChange={e => setItemsPerPage(e.detail.value)}
             interface="popover"
+            style={{ 
+              '--background': 'var(--surface-color)',
+              '--color': 'var(--ion-text-color)'
+            }}
           >
             {[20, 25, 35].map(num => (
               <IonSelectOption key={num} value={num}>
@@ -60,12 +64,20 @@ const RecordTable: React.FC<RecordTableProps> = ({ records }) => {
             ))}
           </IonSelect>
         </div>
-        <div className="flex items-center gap-2">
-          <IonButton disabled={currentPage === 1} onClick={() => setCurrentPage(p => p - 1)}>
+        <div className="flex items-center gap-2" style={{ color: 'var(--ion-text-color)' }}>
+          <IonButton 
+            disabled={currentPage === 1} 
+            onClick={() => setCurrentPage(p => p - 1)}
+            style={{ '--background': 'var(--status-excelente)' }}
+          >
             <IonIcon icon={chevronBack} />
           </IonButton>
           <span>Página {currentPage} de {totalPages}</span>
-          <IonButton disabled={currentPage === totalPages} onClick={() => setCurrentPage(p => p + 1)}>
+          <IonButton 
+            disabled={currentPage === totalPages} 
+            onClick={() => setCurrentPage(p => p + 1)}
+            style={{ '--background': 'var(--status-excelente)' }}
+          >
             <IonIcon icon={chevronForward} />
           </IonButton>
         </div>
@@ -75,10 +87,10 @@ const RecordTable: React.FC<RecordTableProps> = ({ records }) => {
         <div className="space-y-4">
           {visibleRecords.map(record => (
             <IonRow key={record.CODIGO} 
-                   className="items-center shadow-md rounded-lg p-4 mb-2"
+                   className="items-center rounded-lg p-4 mb-2"
                    style={{ 
                      backgroundColor: 'var(--card-background)',
-                     boxShadow: '0 2px 4px var(--table-shadow)',
+                     boxShadow: 'var(--shadow-card)',
                      borderBottom: '1px solid var(--border-color)'
                    }}>
               <IonCol size="12">
@@ -88,7 +100,7 @@ const RecordTable: React.FC<RecordTableProps> = ({ records }) => {
                   </h2>
                   <IonBadge style={{ 
                     backgroundColor: 'var(--status-excelente)',
-                    color: 'var(--ion-text-color)'
+                    color: '#ffffff'
                   }}>
                     {record.ESTADO}
                   </IonBadge>
@@ -105,7 +117,11 @@ const RecordTable: React.FC<RecordTableProps> = ({ records }) => {
                   <span className="text-sm" style={{ color: 'var(--ion-text-color)' }}>
                     Código: {record.CODIGO}
                   </span>
-                  <IonButton fill="clear" onClick={() => setShowContact(record.CONTACTO)}>
+                  <IonButton 
+                    fill="clear" 
+                    onClick={() => setShowContact(record.CONTACTO)}
+                    style={{ '--color': 'var(--status-excelente)' }}
+                  >
                     <IonIcon icon={getContactIcon(record.CONTACTO)} />
                   </IonButton>
                 </div>
@@ -114,12 +130,11 @@ const RecordTable: React.FC<RecordTableProps> = ({ records }) => {
           ))}
         </div>
       ) : (
-        /* Vista escritorio */
         <div>
           {/* Encabezado de tabla */}
           <IonRow className="font-bold rounded-lg p-4 mb-4 text-center" style={{
             backgroundColor: 'var(--ion-color-primary)',
-            color: 'var(--ion-text-color)'
+            color: '#ffffff'
           }}>
             <IonCol size="1" className="text-center">Código</IonCol>
             <IonCol size="2" className="text-center">Artista</IonCol>
@@ -132,7 +147,7 @@ const RecordTable: React.FC<RecordTableProps> = ({ records }) => {
 
           {visibleRecords.map(record => (
             <IonRow key={record.CODIGO} 
-                    className="items-center shadow-md rounded-lg p-4 mb-2"
+                    className="items-center rounded-lg p-4 mb-2"
                     style={{ 
                       backgroundColor: 'var(--surface-color)',
                       color: 'var(--ion-text-color)',
@@ -141,16 +156,25 @@ const RecordTable: React.FC<RecordTableProps> = ({ records }) => {
                     }}
                     onMouseOver={(e) => e.currentTarget.style.backgroundColor = 'var(--border-hover)'}
                     onMouseOut={(e) => e.currentTarget.style.backgroundColor = 'var(--surface-color)'}>
-              <IonCol size="1" className="flex justify-center items-center" style={{ color: 'var(--ion-text-color)' }}>{record.CODIGO}</IonCol>
-              <IonCol size="2" className="flex justify-center items-center" style={{ color: 'var(--ion-text-color)' }}>{record.ARTISTA}</IonCol>
-              <IonCol size="3" className="flex justify-center items-center" style={{ color: 'var(--ion-text-color)' }}>{record.ALBUM}</IonCol>
-              <IonCol size="1" className="flex justify-center items-center" style={{ color: 'var(--ion-text-color)' }}>${record.PRECIO}</IonCol>
-              <IonCol size="1" className="flex justify-center items-center">
-                <IonBadge style={{ backgroundColor: 'var(--status-excelente)', color: 'var(--ion-text-color)' }}>{record.ESTADO}</IonBadge>
+              <IonCol size="1" className="text-center">{record.CODIGO}</IonCol>
+              <IonCol size="2" className="text-center">{record.ARTISTA}</IonCol>
+              <IonCol size="3" className="text-center">{record.ALBUM}</IonCol>
+              <IonCol size="1" className="text-center">${record.PRECIO}</IonCol>
+              <IonCol size="1" className="text-center">
+                <IonBadge style={{ 
+                  backgroundColor: 'var(--status-excelente)',
+                  color: '#ffffff'
+                }}>
+                  {record.ESTADO}
+                </IonBadge>
               </IonCol>
-              <IonCol size="2" className="flex justify-center items-center" style={{ color: 'var(--ion-text-color)' }}>{record.FORMATO}</IonCol>
-              <IonCol size="2" className="flex justify-center items-center">
-                <IonButton fill="clear" onClick={() => setShowContact(record.CONTACTO)}>
+              <IonCol size="2" className="text-center">{record.FORMATO}</IonCol>
+              <IonCol size="2" className="text-center">
+                <IonButton 
+                  fill="clear" 
+                  onClick={() => setShowContact(record.CONTACTO)}
+                  style={{ '--color': 'var(--status-excelente)' }}
+                >
                   <IonIcon icon={getContactIcon(record.CONTACTO)} />
                 </IonButton>
               </IonCol>
@@ -160,13 +184,30 @@ const RecordTable: React.FC<RecordTableProps> = ({ records }) => {
       )}
 
       {/* Popover de contacto */}
-      <IonPopover isOpen={!!showContact} onDidDismiss={() => setShowContact(null)}>
+      <IonPopover 
+        isOpen={!!showContact} 
+        onDidDismiss={() => setShowContact(null)}
+        style={{
+          '--background': 'var(--card-background)',
+          '--color': 'var(--ion-text-color)'
+        }}
+      >
         {showContact && (
-          <IonCard>
+          <IonCard style={{ 
+            '--background': 'var(--card-background)',
+            '--color': 'var(--ion-text-color)'
+          }}>
             <IonCardContent>
-              <IonList>
+              <IonList style={{ 
+                '--background': 'var(--card-background)',
+                '--color': 'var(--ion-text-color)'
+              }}>
                 <IonItem>
-                  <IonIcon icon={getContactIcon(showContact)} slot="start" />
+                  <IonIcon 
+                    icon={getContactIcon(showContact)} 
+                    slot="start"
+                    style={{ color: 'var(--status-excelente)' }}
+                  />
                   <IonLabel>{showContact}</IonLabel>
                 </IonItem>
               </IonList>

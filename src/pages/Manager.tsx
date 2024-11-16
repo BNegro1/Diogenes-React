@@ -53,7 +53,7 @@ const Manager: React.FC = () => {
 
   return (
     <Layout title="Administración">
-      <IonContent>
+      <IonContent style={{ '--background': 'var(--ion-background-color)' }}>
         <IonGrid fixed>
           <IonRow>
             <IonCol size="12" sizeMd="8" offsetMd="2" sizeLg="6" offsetLg="3">
@@ -62,15 +62,25 @@ const Manager: React.FC = () => {
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.5 }}
               >
-                <IonCard className="ion-margin">
+                <IonCard style={{ 
+                  '--background': 'var(--card-background)',
+                  '--box-shadow': 'var(--shadow-card)',
+                  borderColor: 'var(--border-color)'
+                }}>
                   <IonCardContent>
                     {isAuthenticated ? (
                       <>
-                        <h2 className="text-xl sm:text-2xl font-bold mb-4">Cargar Registros</h2>
+                        <h2 className="text-xl sm:text-2xl font-bold mb-4" style={{ color: 'var(--ion-text-color)' }}>
+                          Cargar Registros
+                        </h2>
                         <FileUpload onUpload={handleFileUpload} />
                         {records.length > 0 && (
                           <div className="mt-4">
-                            <IonButton expand="block" onClick={handleUpload}>
+                            <IonButton 
+                              expand="block" 
+                              onClick={handleUpload}
+                              style={{ '--background': 'var(--status-excelente)' }}
+                            >
                               Actualizar vinilos
                             </IonButton>
                           </div>
@@ -78,9 +88,14 @@ const Manager: React.FC = () => {
                       </>
                     ) : (
                       <>
-                        <h2 className="text-xl sm:text-2xl font-bold mb-4">Ingreso</h2>
+                        <h2 className="text-xl sm:text-2xl font-bold mb-4" style={{ color: 'var(--ion-text-color)' }}>
+                          Ingreso
+                        </h2>
                         <div className="space-y-4">
-                          <IonItem>
+                          <IonItem style={{ 
+                            '--background': 'var(--input-background)',
+                            '--color': 'var(--ion-text-color)'
+                          }}>
                             <IonLabel position="floating">Email</IonLabel>
                             <IonInput
                               value={email}
@@ -88,7 +103,10 @@ const Manager: React.FC = () => {
                               type="email"
                             />
                           </IonItem>
-                          <IonItem>
+                          <IonItem style={{ 
+                            '--background': 'var(--input-background)',
+                            '--color': 'var(--ion-text-color)'
+                          }}>
                             <IonLabel position="floating">Contraseña</IonLabel>
                             <IonInput
                               value={password}
@@ -96,7 +114,11 @@ const Manager: React.FC = () => {
                               type="password"
                             />
                           </IonItem>
-                          <IonButton expand="block" onClick={handleLogin}>
+                          <IonButton 
+                            expand="block" 
+                            onClick={handleLogin}
+                            style={{ '--background': 'var(--status-excelente)' }}
+                          >
                             Entrar como administrador
                           </IonButton>
                         </div>
@@ -115,10 +137,13 @@ const Manager: React.FC = () => {
           header="Error de Autenticación"
           message="Credenciales inválidas. Por favor, intente nuevamente."
           buttons={['OK']}
+          style={{
+            '--background': 'var(--card-background)',
+            '--color': 'var(--ion-text-color)'
+          }}
         />
       </IonContent>
     </Layout>
   );
 };
-
 export default Manager;

@@ -1,24 +1,30 @@
 :root {
   /* Base */
-  --ion-color-primary: #bbbbbbc4;
-  --ion-background-color: rgba(18, 18, 18, 0.95);  /* Fondo más sólido */
-  --ion-text-color: #ffffff;
+  --ion-color-primary: #000000;  /* Gris oscuro para elementos primarios */
+  --ion-background-color: #  /* Blanco puro para el fondo principal */
+  --ion-text-color: #0a0a0a;  /* Negro profundo para texto */
   
   /* Surface & Cards */
-  --surface-color: rgba(42, 42, 42, 0.95);
-  --card-background: rgba(28, 28, 28, 0.98);
-  --input-background: rgba(255, 255, 255, 0.9);
+  --surface-color: #e0e0e0;  /* Gris claro para superficies */
+  --card-background: #ffffff;  /* Blanco para tarjetas */
+  --input-background: rgba(99, 68, 68, 0.1);  /* Gris medio con transparencia para inputs */
   
   /* Borders & Dividers */
-  --surface-color: rgba(42, 42, 42, 0.95);
-  --border-hover: rgba(100, 100, 100, 0.8);
-  --input-background: rgba(255, 255, 255, 0.9);
+  --border-color: #4e4e4e;  /* Gris medio para bordes */
+  --border-hover: #ffffff;  /* Gris oscuro para hover */
+
+  /* Navbar */
+  --navbar-background: #000000;  /* Negro profundo para la barra de navegación */
 
   /* Status Colors */
-  --status-excelente: #10b981;
-  --status-bueno: #3b82f6;
-  --status-regular: #f59e0b;
-  --status-malo: #ef4444;
+  --status-excelente: #121312;  
+  --status-bueno: #000000;     
+  --status-regular: #000000;   
+  --status-malo: #404040;      
+
+  /* Shadows */
+  --shadow-card: 0 2px 4px rgba(10, 10, 10, 0.1);
+  --shadow-card-hover: 0 4px 8px rgba(10, 10, 10, 0.2);
 }
 
 .search-input {
@@ -31,13 +37,23 @@
   transition: all 0.2s ease;
 }
 
+.search-input:focus {
+  border-color: var(--border-hover);
+  box-shadow: 0 0 0 2px rgba(64, 64, 64, 0.1);
+}
+
 .search-button {
   background: var(--status-excelente);
-  color: rgb(75, 69, 69);
+  color: #ffffff;
   border: none;
   border-radius: 6px;
   padding: 0.75rem 1.5rem;
   font-weight: 500;
+
+}
+
+.search-button:hover {
+  background: #990000;  /* Rojo oscuro para hover */
 }
 
 .record-card {
@@ -47,11 +63,12 @@
   display: flex;
   align-items: center;
   gap: 1rem;
+  border: 1px solid var(--border-color);
 }
 
 .record-card:hover {
   transform: translateY(-2px);
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  box-shadow: var(--shadow-card-hover);
   border-color: var(--border-hover);
 }
 
@@ -68,37 +85,5 @@
   font-size: 0.875rem;
   font-weight: 500;
   text-transform: capitalize;
-}
-
-.status-badge.malo {
-  background: var(--status-malo);
-  color: white;
-}
-
-.social-icon {
-  color: rgba(255, 255, 255, 0.6);
-  transition: all 0.2s ease;
-}
-
-.social-icon:hover {
-  color: var(--ion-text-color);
-  transform: scale(1.1);
-}
-
-@media (max-width: 768px) {
-  .search-container {
-    padding: 1rem;
-  }
-  
-  .record-card {
-    padding: 0.75rem;
-  }
-  
-  .record-title {
-    font-size: 1.125rem;
-  }
-  
-  .record-price {
-    font-size: 1.25rem;
-  }
+  color: #ffffff;
 }

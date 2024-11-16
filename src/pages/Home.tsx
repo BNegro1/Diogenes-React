@@ -25,31 +25,17 @@ const Home: React.FC = () => {
   };
 
   return (
-    <Layout title="Diogenes Discs">
+    <Layout title="Diogenes Discs" >
       <IonContent>
         <div className="relative">
-          <div className="absolute inset-0">
-            <img 
-              src={heroImage}
-              alt="Portada" 
-              className="h-full w-full object-cover filter blur-sm"
-            />
-          </div>
-          <div className="h-[40vh] md:h-[50vh] relative">
-            <div className="absolute inset-0 bg-gradient-to-br from-[var(--color-navbar-start)]/80 to-[var(--color-navbar-end)]/70 flex items-center justify-center p-4">
-              <div className="text-center max-w-4xl mx-auto">
-                <h1 className="text-5xl font-bold text-white mb-4"
-                    style={{
-                      WebkitTextStroke: '1px white',
-                      color: 'black',
-                    }}>
+          <div className="h-[40vh] md:h-[50vh] bg-cover bg-center relative"
+               style={{ backgroundImage: `url(${heroImage})` }}>
+            <div className="absolute inset-0 bg-black bg-opacity-50 flex items-center justify-center px-4">
+              <div className="text-center">
+                <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold text-white mb-4">
                   Descubre Tu Vinilo Perfecto
                 </h1>
-                <p className="text-3xl font-bold text-white mb-4"
-                   style={{
-                      WebkitTextStroke: '0.5px white',
-                      color: 'black',
-                   }}>
+                <p className="text-white text-lg md:text-xl">
                   Explora nuestra colección única de vinilos
                 </p>
               </div>

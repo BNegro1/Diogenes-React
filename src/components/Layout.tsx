@@ -23,26 +23,25 @@ const Layout: React.FC<LayoutProps> = ({ children, title }) => {
   return (
     <IonPage>
       <IonHeader className="ion-no-border">
-        <IonToolbar className="bg-gradient-to-r from-[#1a1a1a] to-[#313131] shadow-md">
-          <IonTitle className="text-gray-100 font-semibold">{title}</IonTitle>
+        <IonToolbar className="bg-[var(--navbar-background)]">
+          <IonTitle className={`font-semibold text-white ${title}`}>{title}</IonTitle>
           <IonButtons slot="end">
-            <IonButton 
-              className="text-gray-200 hover:text-white transition-colors" 
+            <IonButton
+              className="text-white"
               onClick={() => history.push('/')}
             >
-              <IonIcon icon={home} className="w-5 h-5" />
+              <IonIcon icon={home} />
             </IonButton>
-            <IonButton 
-              className="text-gray-200 hover:text-white transition-colors" 
+            <IonButton
+              className="text-white"
               onClick={() => history.push('/manager')}
             >
-              <IonIcon icon={settings} className="w-5 h-5" />
+              <IonIcon icon={settings} />
             </IonButton>
           </IonButtons>
         </IonToolbar>
       </IonHeader>
-
-      <IonContent className="bg-[#f5f5f5]">
+      <IonContent>
         {children}
       </IonContent>
     </IonPage>
