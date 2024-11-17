@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import { IonButton, IonSpinner, IonSelect, IonSelectOption } from '@ionic/react';
-import { Instagram } from 'lucide-react';
 import { VinylRecord } from '../types/Record';
 
 interface CatalogTableProps {
@@ -65,10 +64,6 @@ const CatalogTable: React.FC<CatalogTableProps> = ({
     );
   }
 
-  const handleInstagramClick = (contacto: string) => {
-    window.open(`https://instagram.com/${contacto.toLowerCase().replace(/\s+/g, '')}`, '_blank');
-  };
-
   return (
     <div>
       <div className="mb-4 grid grid-cols-1 md:grid-cols-3 gap-4">
@@ -112,18 +107,58 @@ const CatalogTable: React.FC<CatalogTableProps> = ({
         </IonSelect>
       </div>
 
-      <div className="overflow-x-auto">
+      {/* Mobile View */}
+      <div className="md:hidden grid grid-cols-1 gap-6">
+        {visibleRecords.map((record) => (
+          <div key={record.CODIGO} className="bg-white rounded-lg shadow-md overflow-hidden border border-gray-200">
+            <div className="p-4">
+              <div className="text-sm text-gray-500 mb-1">{record.CODIGO}</div>
+              <h3 className="text-xl font-bold mb-1">{record.ARTISTA}</h3>
+              <p className="text-gray-600 mb-2">{record.ALBUM}</p>
+              <div className="flex flex-col gap-2">
+                <div className="text-sm">
+                  <span className="text-gray-500">Formato:</span> {record.FORMATO}
+                </div>
+                <div className="text-sm">
+                  <span className="text-gray-500">Estado:</span> {record.ESTADO}
+                </div>
+                <div className="text-sm">
+                  <span className="text-gray-500">Ubicación:</span> {record.COMUNA}
+                </div>
+              </div>
+              <div className="mt-4">
+                <div className="text-2xl font-bold text-[#ff1a1a]">
+                  ${record.PRECIO.toLocaleString()}
+                </div>
+              </div>
+            </div>
+            <div className="bg-gray-50 px-4 py-3 flex justify-between items-center">
+              <div className="text-sm text-gray-600">{record.CONTACTO}</div>
+              <button 
+                onClick={() => window.open(`https://instagram.com/${record.CONTACTO.toLowerCase().replace(/\s+/g, '')}`, '_blank')}
+                className="bg-[#ff1a1a] text-white px-4 py-2 rounded hover:bg-[#990000] transition-colors"
+              >
+                Ir a la tienda
+              </button>
+            </div>
+          </div>
+        ))}
+      </div>
+
+      {/* Desktop View */}
+      <div className="hidden md:block overflow-x-auto">
         <table className="min-w-full bg-white border-2 border-[#404040] rounded-lg overflow-hidden">
           <thead>
             <tr className="bg-[#0a0a0a] text-white text-center">
               <th className="px-4 py-2">Código</th>
-              <th className="px-4 py-2">Precio</th>
               <th className="px-4 py-2">Artista</th>
               <th className="px-4 py-2">Álbum</th>
-              <th className="px-4 py-2">Estado</th>
               <th className="px-4 py-2">Formato</th>
+              <th className="px-4 py-2">Estado</th>
               <th className="px-4 py-2">Comuna</th>
+              <th className="px-4 py-2">Precio</th>
               <th className="px-4 py-2">Contacto</th>
+              <th className="px-4 py-2">Acción</th>
             </tr>
           </thead>
           <tbody>
@@ -131,24 +166,26 @@ const CatalogTable: React.FC<CatalogTableProps> = ({
               <tr 
                 key={record.CODIGO}
                 className={`
-                  border-b-2 border-[#e0e0e0] hover:bg-[#e0e0e0] text-center
-                  ${index % 2 === 0 ? 'bg-white' : 'bg-[#e0e0e0]'}
+                  border-b border-gray-200 hover:bg-gray-50
+                  ${index % 2 === 0 ? 'bg-white' : 'bg-gray-50'}
                 `}
               >
-                <td className="px-4 py-2 border-r-2 border-[#e0e0e0]">{record.CODIGO}</td>
-                <td className="px-4 py-2 border-r-2 border-[#e0e0e0]">${record.PRECIO.toLocaleString()}</td>
-                <td className="px-4 py-2 border-r-2 border-[#e0e0e0]">{record.ARTISTA}</td>
-                <td className="px-4 py-2 border-r-2 border-[#e0e0e0]">{record.ALBUM}</td>
-                <td className="px-4 py-2 border-r-2 border-[#e0e0e0]">{record.ESTADO}</td>
-                <td className="px-4 py-2 border-r-2 border-[#e0e0e0]">{record.FORMATO}</td>
-                <td className="px-4 py-2 border-r-2 border-[#e0e0e0]">{record.COMUNA}</td>
-                <td className="px-4 py-2 flex items-center justify-center gap-2">
-                  <span className="text-[#ff1a1a]">{record.CONTACTO}</span>
-                  <button 
-                    onClick={() => handleInstagramClick(record.CONTACTO)}
-                    className="text-[#ff1a1a] hover:text-[#990000]"
+                <td className="px-4 py-2 text-center">{record.CODIGO}</td>
+                <td className="px-4 py-2 text-center font-medium">{record.ARTISTA}</td>
+                <td className="px-4 py-2 text-center">{record.ALBUM}</td>
+                <td className="px-4 py-2 text-center">{record.FORMATO}</td>
+                <td className="px-4 py-2 text-center">{record.ESTADO}</td>
+                <td className="px-4 py-2 text-center">{record.COMUNA}</td>
+                <td className="px-4 py-2 text-center font-bold text-[#ff1a1a]">
+                  ${record.PRECIO.toLocaleString()}
+                </td>
+                <td className="px-4 py-2 text-center">{record.CONTACTO}</td>
+                <td className="px-4 py-2 text-center">
+                  <button
+                    onClick={() => window.open(`https://instagram.com/${record.CONTACTO.toLowerCase().replace(/\s+/g, '')}`, '_blank')}
+                    className="bg-[#ff1a1a] text-white px-3 py-1 rounded text-sm hover:bg-[#990000] transition-colors"
                   >
-                    <Instagram size={20} />
+                    Ir a la tienda
                   </button>
                 </td>
               </tr>
@@ -158,7 +195,7 @@ const CatalogTable: React.FC<CatalogTableProps> = ({
       </div>
 
       {filteredRecords.length > itemsPerPage && (
-        <div className="flex justify-center mt-4 gap-2">
+        <div className="flex justify-center mt-6 gap-2">
           <IonButton
             fill="clear"
             disabled={currentPage === 1}

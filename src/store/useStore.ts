@@ -8,12 +8,19 @@ interface Store {
   isLoading: boolean;
   searchTerms: { artist: string; album: string } | null;
   user: User | null;
+  filters: {
+    estado: string;
+    formato: string;
+    comuna: string;
+  };
   setRecords: (records: VinylRecord[]) => void;
   setUser: (user: User | null) => void;
   setIsLoading: (loading: boolean) => void;
   searchRecordsFromDb: (artist?: string, album?: string) => Promise<void>;
   loadAllRecords: () => Promise<void>;
   getPredictiveResults: (term: string, type: 'artist' | 'album') => VinylRecord[];
+  resetFilters: () => void;
+  setFilters: (filters: { estado: string; formato: string; comuna: string }) => void;
 }
 
 export const useStore = create<Store>((set, get) => ({
@@ -22,14 +29,20 @@ export const useStore = create<Store>((set, get) => ({
   isLoading: false,
   searchTerms: null,
   user: null,
+  filters: {
+    estado: '',
+    formato: '',
+    comuna: ''
+  },
   setRecords: (records) => set({ records }),
   setUser: (user) => set({ user }),
   setIsLoading: (isLoading) => set({ isLoading }),
+  resetFilters: () => set({ filters: { estado: '', formato: '', comuna: '' } }),
+  setFilters: (filters) => set({ filters }),
   searchRecordsFromDb: async (artist = '', album = '') => {
     set({ isLoading: true, searchTerms: { artist, album } });
     const records = await searchRecords(artist, album);
 
-    // Filter exact matches if full name is provided
     const filteredRecords = records.filter(record => {
       if (artist && !album) {
         return record.ARTISTA.toLowerCase() === artist.toLowerCase();
