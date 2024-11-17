@@ -1,45 +1,44 @@
 :root {
-  /* Base */
-  --ion-color-primary: #000000;  /* Gris oscuro para elementos primarios */
-  --ion-background-color: #  /* Blanco puro para el fondo principal */
-  --ion-text-color: #0a0a0a;  /* Negro profundo para texto */
+  /* Base Colors */
+  --ion-color-primary: #0a0a0a;
+  --ion-background-color: #ffffff;
+  --ion-text-color: #0a0a0a;
   
   /* Surface & Cards */
-  --surface-color: #e0e0e0;  /* Gris claro para superficies */
-  --card-background: #ffffff;  /* Blanco para tarjetas */
-  --input-background: rgba(99, 68, 68, 0.1);  /* Gris medio con transparencia para inputs */
+  --surface-color: #e0e0e0;
+  --card-background: #ffffff;
+  --input-background: #e0e0e0;
   
   /* Borders & Dividers */
-  --border-color: #4e4e4e;  /* Gris medio para bordes */
-  --border-hover: #ffffff;  /* Gris oscuro para hover */
+  --border-color: #404040;
+  --border-hover: #a0a0a0;
 
   /* Navbar */
-  --navbar-background: #000000;  /* Negro profundo para la barra de navegación */
+  --navbar-background: #0a0a0a;
 
   /* Status Colors */
-  --status-excelente: #121312;  
-  --status-bueno: #000000;     
-  --status-regular: #000000;   
-  --status-malo: #404040;      
+  --status-excelente: #ff1a1a;
+  --status-bueno: #cc0000;
+  --status-regular: #990000;
+  --status-malo: #404040;
 
   /* Shadows */
-  --shadow-card: 0 2px 4px rgba(10, 10, 10, 0.1);
-  --shadow-card-hover: 0 4px 8px rgba(10, 10, 10, 0.2);
+  --shadow-card: 0 2px 4px #404040;
+  --shadow-card-hover: 0 4px 8px #404040;
 }
 
 .search-input {
   background: var(--input-background);
-  border: 1px solid var(--border-color);
+  border: 2px solid var(--border-color);
   border-radius: 6px;
   color: var(--ion-text-color);
   padding: 0.75rem 1rem;
   width: 100%;
-  transition: all 0.2s ease;
 }
 
 .search-input:focus {
   border-color: var(--border-hover);
-  box-shadow: 0 0 0 2px rgba(64, 64, 64, 0.1);
+  outline: 2px solid var(--border-color);
 }
 
 .search-button {
@@ -49,11 +48,10 @@
   border-radius: 6px;
   padding: 0.75rem 1.5rem;
   font-weight: 500;
-
 }
 
 .search-button:hover {
-  background: #990000;  /* Rojo oscuro para hover */
+  background: var(--status-regular);
 }
 
 .record-card {
@@ -63,12 +61,10 @@
   display: flex;
   align-items: center;
   gap: 1rem;
-  border: 1px solid var(--border-color);
+  border: 2px solid var(--border-color);
 }
 
 .record-card:hover {
-  transform: translateY(-2px);
-  box-shadow: var(--shadow-card-hover);
   border-color: var(--border-hover);
 }
 

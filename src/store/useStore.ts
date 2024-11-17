@@ -28,7 +28,7 @@ export const useStore = create<Store>((set, get) => ({
   searchRecordsFromDb: async (artist = '', album = '') => {
     set({ isLoading: true, searchTerms: { artist, album } });
     const records = await searchRecords(artist, album);
-    
+
     // Filter exact matches if full name is provided
     const filteredRecords = records.filter(record => {
       if (artist && !album) {
@@ -36,7 +36,7 @@ export const useStore = create<Store>((set, get) => ({
       }
       return true;
     });
-    
+
     set({ records: filteredRecords.length > 0 ? filteredRecords : records, isLoading: false });
   },
   loadAllRecords: async () => {
@@ -47,7 +47,7 @@ export const useStore = create<Store>((set, get) => ({
   getPredictiveResults: (term: string, type: 'artist' | 'album') => {
     const { allRecords } = get();
     const searchTerm = term.toLowerCase();
-    
+
     return allRecords.filter(record => {
       const field = type === 'artist' ? record.ARTISTA : record.ALBUM;
       return field.toLowerCase().includes(searchTerm);

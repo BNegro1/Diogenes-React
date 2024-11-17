@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { IonButton, IonSpinner } from '@ionic/react';
 import { ArrowUpDown } from 'lucide-react';
 import { VinylRecord } from '../types/Record';
@@ -21,6 +21,26 @@ const RecordTable: React.FC<RecordTableProps> = ({
     key: keyof VinylRecord;
     direction: 'asc' | 'desc';
   } | null>(null);
+  const [displayedPages, setDisplayedPages] = useState<number[]>([]);
+
+  useEffect(() => {
+    const totalPages = Math.ceil(records.length / itemsPerPage);
+    const pages: number[] = [];
+    const maxDisplayPages = 5;
+    
+    let startPage = Math.max(1, currentPage - Math.floor(maxDisplayPages / 2));
+    let endPage = Math.min(totalPages, startPage + maxDisplayPages - 1);
+    
+    if (endPage - startPage + 1 < maxDisplayPages) {
+      startPage = Math.max(1, endPage - maxDisplayPages + 1);
+    }
+    
+    for (let i = startPage; i <= endPage; i++) {
+      pages.push(i);
+    }
+    
+    setDisplayedPages(pages);
+  }, [currentPage, records.length, itemsPerPage]);
 
   const sortRecords = (records: VinylRecord[]) => {
     if (!sortConfig) return records;
@@ -73,7 +93,7 @@ const RecordTable: React.FC<RecordTableProps> = ({
 
   const TableHeader: React.FC<{ label: string; field: keyof VinylRecord }> = ({ label, field }) => (
     <th 
-      className="px-4 py-2 cursor-pointer hover:bg-gray-700 transition-colors"
+      className="px-4 py-2 cursor-pointer hover:bg-gray-700"
       onClick={() => handleSort(field)}
     >
       <div className="flex items-center justify-center gap-2">
@@ -84,47 +104,47 @@ const RecordTable: React.FC<RecordTableProps> = ({
   );
 
   const MobileCard: React.FC<{ record: VinylRecord }> = ({ record }) => (
-    <div className="bg-white rounded-lg shadow-md p-4 mb-4 border border-gray-200">
+    <div className="bg-white rounded-lg shadow-md p-4 mb-4 border-2 border-[#404040]">
       <div className="grid grid-cols-1 gap-3">
-        <div className="border-b pb-2">
-          <div className="font-semibold text-gray-600">Código</div>
+        <div className="border-b-2 border-[#e0e0e0] pb-2">
+          <div className="font-semibold text-[#404040]">Código</div>
           <div className="text-lg">{record.CODIGO}</div>
         </div>
         
-        <div className="border-b pb-2">
-          <div className="font-semibold text-gray-600">Artista</div>
+        <div className="border-b-2 border-[#e0e0e0] pb-2">
+          <div className="font-semibold text-[#404040]">Artista</div>
           <div className="text-lg">{record.ARTISTA}</div>
         </div>
         
-        <div className="border-b pb-2">
-          <div className="font-semibold text-gray-600">Álbum</div>
+        <div className="border-b-2 border-[#e0e0e0] pb-2">
+          <div className="font-semibold text-[#404040]">Álbum</div>
           <div className="text-lg">{record.ALBUM}</div>
         </div>
         
-        <div className="border-b pb-2">
-          <div className="font-semibold text-gray-600">Estado</div>
+        <div className="border-b-2 border-[#e0e0e0] pb-2">
+          <div className="font-semibold text-[#404040]">Estado</div>
           <div className="text-lg">{record.ESTADO}</div>
         </div>
         
-        <div className="border-b pb-2">
-          <div className="font-semibold text-gray-600">Precio</div>
+        <div className="border-b-2 border-[#e0e0e0] pb-2">
+          <div className="font-semibold text-[#404040]">Precio</div>
           <div className="text-lg">${record.PRECIO.toLocaleString()}</div>
         </div>
         
-        <div className="border-b pb-2">
-          <div className="font-semibold text-gray-600">Formato</div>
+        <div className="border-b-2 border-[#e0e0e0] pb-2">
+          <div className="font-semibold text-[#404040]">Formato</div>
           <div className="text-lg">{record.FORMATO}</div>
         </div>
         
-        <div className="border-b pb-2">
-          <div className="font-semibold text-gray-600">Comuna</div>
+        <div className="border-b-2 border-[#e0e0e0] pb-2">
+          <div className="font-semibold text-[#404040]">Comuna</div>
           <div className="text-lg">{record.COMUNA}</div>
         </div>
         
         <div>
-          <div className="font-semibold text-gray-600">Contacto</div>
+          <div className="font-semibold text-[#404040]">Contacto</div>
           <div className="text-lg">
-            <a href="#" className="text-blue-600 hover:text-blue-800">
+            <a href="#" className="text-[#ff1a1a] hover:text-[#990000]">
               {record.CONTACTO}
             </a>
           </div>
@@ -152,9 +172,9 @@ const RecordTable: React.FC<RecordTableProps> = ({
 
       {/* Desktop View */}
       <div className="hidden md:block overflow-x-auto">
-        <table className="min-w-full bg-white border border-gray-200 rounded-lg overflow-hidden">
+        <table className="min-w-full bg-white border-2 border-[#404040] rounded-lg overflow-hidden">
           <thead>
-            <tr className="bg-gray-800 text-white text-center">
+            <tr className="bg-[#0a0a0a] text-white text-center">
               <TableHeader label="Código" field="CODIGO" />
               <TableHeader label="Precio" field="PRECIO" />
               <TableHeader label="Artista" field="ARTISTA" />
@@ -170,19 +190,19 @@ const RecordTable: React.FC<RecordTableProps> = ({
               <tr 
                 key={record.CODIGO} 
                 className={`
-                  border-b hover:bg-gray-50 text-center
-                  ${index % 2 === 0 ? 'bg-gray-50' : 'bg-white'}
+                  border-b-2 border-[#e0e0e0] hover:bg-[#e0e0e0] text-center
+                  ${index % 2 === 0 ? 'bg-white' : 'bg-[#e0e0e0]'}
                 `}
               >
-                <td className="px-4 py-3 border-r">{record.CODIGO}</td>
-                <td className="px-4 py-3 border-r">${record.PRECIO.toLocaleString()}</td>
-                <td className="px-4 py-3 border-r">{record.ARTISTA}</td>
-                <td className="px-4 py-3 border-r">{record.ALBUM}</td>
-                <td className="px-4 py-3 border-r">{record.ESTADO}</td>
-                <td className="px-4 py-3 border-r">{record.FORMATO}</td>
-                <td className="px-4 py-3 border-r">{record.COMUNA}</td>
+                <td className="px-4 py-3 border-r-2 border-[#e0e0e0]">{record.CODIGO}</td>
+                <td className="px-4 py-3 border-r-2 border-[#e0e0e0]">${record.PRECIO.toLocaleString()}</td>
+                <td className="px-4 py-3 border-r-2 border-[#e0e0e0]">{record.ARTISTA}</td>
+                <td className="px-4 py-3 border-r-2 border-[#e0e0e0]">{record.ALBUM}</td>
+                <td className="px-4 py-3 border-r-2 border-[#e0e0e0]">{record.ESTADO}</td>
+                <td className="px-4 py-3 border-r-2 border-[#e0e0e0]">{record.FORMATO}</td>
+                <td className="px-4 py-3 border-r-2 border-[#e0e0e0]">{record.COMUNA}</td>
                 <td className="px-4 py-3">
-                  <a href="#" className="text-blue-600 hover:text-blue-800">
+                  <a href="#" className="text-[#ff1a1a] hover:text-[#990000]">
                     {record.CONTACTO}
                   </a>
                 </td>
@@ -195,6 +215,7 @@ const RecordTable: React.FC<RecordTableProps> = ({
       {records.length > itemsPerPage && (
         <div className="flex justify-center mt-6 gap-2">
           <IonButton
+            className="border-2 border-[#404040]"
             fill="clear"
             disabled={currentPage === 1}
             onClick={() => setCurrentPage(1)}
@@ -202,15 +223,17 @@ const RecordTable: React.FC<RecordTableProps> = ({
             «
           </IonButton>
           <IonButton
+            className="border-2 border-[#404040]"
             fill="clear"
             disabled={currentPage === 1}
             onClick={() => setCurrentPage(p => p - 1)}
           >
             ‹
           </IonButton>
-          {Array.from({ length: totalPages }, (_, i) => i + 1).map((page) => (
+          {displayedPages.map((page) => (
             <IonButton
               key={page}
+              className={`border-2 border-[#404040] ${currentPage === page ? 'bg-[#ff1a1a] text-white' : ''}`}
               fill={currentPage === page ? "solid" : "clear"}
               onClick={() => setCurrentPage(page)}
             >
@@ -218,6 +241,7 @@ const RecordTable: React.FC<RecordTableProps> = ({
             </IonButton>
           ))}
           <IonButton
+            className="border-2 border-[#404040]"
             fill="clear"
             disabled={currentPage === totalPages}
             onClick={() => setCurrentPage(p => p + 1)}
@@ -225,6 +249,7 @@ const RecordTable: React.FC<RecordTableProps> = ({
             ›
           </IonButton>
           <IonButton
+            className="border-2 border-[#404040]"
             fill="clear"
             disabled={currentPage === totalPages}
             onClick={() => setCurrentPage(totalPages)}

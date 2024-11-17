@@ -2,7 +2,7 @@ import React from 'react';
 import { IonContent, IonPage, IonHeader, IonToolbar, IonButtons, IonButton, IonSelect, IonSelectOption } from '@ionic/react';
 import { useHistory } from 'react-router-dom';
 import { useStore } from '../store/useStore';
-import RecordTable from '../components/RecordTable';
+import ResultsTable from '../components/ResultsTable';
 
 const Results: React.FC = () => {
   const history = useHistory();
@@ -37,7 +37,7 @@ const Results: React.FC = () => {
               value={itemsPerPage}
               onIonChange={e => setItemsPerPage(e.detail.value)}
               interface="popover"
-              className="bg-gray-100 rounded-md"
+              className="bg-[#e0e0e0] rounded-md"
             >
               <IonSelectOption value={10}>10</IonSelectOption>
               <IonSelectOption value={20}>20</IonSelectOption>
@@ -45,7 +45,7 @@ const Results: React.FC = () => {
             </IonSelect>
           </div>
 
-          <RecordTable 
+          <ResultsTable 
             records={records} 
             itemsPerPage={itemsPerPage}
             isLoading={isLoading}
