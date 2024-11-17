@@ -3,7 +3,7 @@ import { IonContent, IonPage, IonHeader, IonToolbar, IonButtons, IonButton, IonI
 import { useHistory } from 'react-router-dom';
 import { useStore } from '../store/useStore';
 import CatalogTable from '../components/CatalogTable';
-import { disc } from 'ionicons/icons';
+import { disc, arrowBack } from 'ionicons/icons';
 import Footer from '../components/Footer';
 
 const Catalog: React.FC = () => {
@@ -44,23 +44,33 @@ const Catalog: React.FC = () => {
 
       <IonContent className="ion-padding">
         <div className="max-w-7xl mx-auto">
-          <div className="flex flex-col sm:flex-row items-center justify-between mb-6 gap-4">
-            <h1 className="text-2xl sm:text-3xl font-bold text-center sm:text-left">
-              Catálogo de Vinilos
-            </h1>
-            
-            <div className="flex items-center gap-2">
-              <label className="text-sm sm:text-base">Mostrar por página:</label>
-              <select
-                value={itemsPerPage}
-                onChange={(e) => setItemsPerPage(Number(e.target.value))}
-                className="p-2 border-2 border-[#404040] rounded-lg bg-white"
+          <div className="max-w-7xl mx-auto">
+            <div className="flex flex-col sm:flex-row items-center justify-between mb-6 gap-4">
+              <h1 className="text-2xl sm:text-3xl font-bold">Catálogo completo</h1>
+              <IonButton
+                fill="clear"
+                onClick={() => {
+                  resetFilters();
+                  history.push('/home');
+                }}
+                className="flex items-center"
               >
-                <option value={10}>10</option>
-                <option value={20}>20</option>
-                <option value={50}>50</option>
-              </select>
+                
+                <IonIcon icon={arrowBack} slot="start" />
+                Regresar al inicio
+              </IonButton>
             </div>
+          <div className="mb-6 flex items-center justify-end">
+            <label className="mr-2 text-sm sm:text-base">Mostrar por página:</label>
+            <select
+              value={itemsPerPage}
+              onChange={(e) => setItemsPerPage(Number(e.target.value))}
+              className="p-2 border-2 border-[#404040] rounded-lg bg-white"
+            >
+              <option value={10}>10</option>
+              <option value={15}>15</option>
+            </select>
+          </div>
           </div>
 
           <CatalogTable 

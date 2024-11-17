@@ -62,8 +62,7 @@ const Results: React.FC = () => {
               className="p-2 border-2 border-[#404040] rounded-lg bg-white"
             >
               <option value={10}>10</option>
-              <option value={20}>20</option>
-              <option value={50}>50</option>
+              <option value={15}>15</option>
             </select>
           </div>
 

@@ -3,9 +3,13 @@ import { IonFooter, IonToolbar } from '@ionic/react';
 import { disc, logoInstagram, logoFacebook, logoTwitter } from 'ionicons/icons';
 import { IonIcon } from '@ionic/react';
 
-const Footer: React.FC = () => {
+interface FooterProps {
+  className?: string;
+}
+
+const Footer: React.FC<FooterProps> = ({ className }) => {
   return (
-    <IonFooter className="mt-auto relative bottom-0 w-full">
+    <IonFooter className={`mt-auto relative bottom-0 w-full ${className || ''}`}>
       <IonToolbar className="footer-toolbar">
         <div className="max-w-7xl mx-auto">
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6 items-center">

@@ -18,9 +18,9 @@
   --navbar-background: #0a0a0a;
 
   /* Status Colors */
-  --status-excelente: #ff1a1a;
-  --status-bueno: #cc0000;
-  --status-regular: #990000;
+  --status-excelente: #63f187;
+  --status-bueno: #a2ff4a;
+  --status-regular: #fdff6de8;
   --status-malo: #404040;
 
   /* Shadows */

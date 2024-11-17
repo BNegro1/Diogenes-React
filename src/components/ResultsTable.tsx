@@ -161,7 +161,7 @@ const ResultsTable: React.FC<ResultsTableProps> = ({
                 </div>
               </div>
               <div className="mt-4">
-                <div className="text-2xl font-bold text-[#ff1a1a]">
+                <div className="text-2xl font-bold">
                   ${record.PRECIO.toLocaleString()}
                 </div>
               </div>
@@ -170,7 +170,7 @@ const ResultsTable: React.FC<ResultsTableProps> = ({
               <div className="text-sm text-gray-600">{record.CONTACTO}</div>
               <button 
                 onClick={() => window.open(`https://instagram.com/${record.CONTACTO.toLowerCase().replace(/\s+/g, '')}`, '_blank')}
-                className="bg-[#ff1a1a] text-white px-4 py-2 rounded hover:bg-[#990000] transition-colors"
+                className="bg-[#404040] text-white px-4 py-2 rounded hover:bg-[#a0a0a0] transition-colors"
               >
                 Ir a la tienda
               </button>
@@ -210,14 +210,14 @@ const ResultsTable: React.FC<ResultsTableProps> = ({
                 <td className="px-4 py-2 text-center">{record.FORMATO}</td>
                 <td className="px-4 py-2 text-center">{record.ESTADO}</td>
                 <td className="px-4 py-2 text-center">{record.COMUNA}</td>
-                <td className="px-4 py-2 text-center font-bold text-[#ff1a1a]">
+                <td className="px-4 py-2 text-center font-bold">
                   ${record.PRECIO.toLocaleString()}
                 </td>
                 <td className="px-4 py-2 text-center">{record.CONTACTO}</td>
                 <td className="px-4 py-2 text-center">
                   <button
                     onClick={() => window.open(`https://instagram.com/${record.CONTACTO.toLowerCase().replace(/\s+/g, '')}`, '_blank')}
-                    className="bg-[#ff1a1a] text-white px-3 py-1 rounded text-sm hover:bg-[#990000] transition-colors"
+                    className="bg-[#404040] text-white px-4 py-2 rounded hover:bg-[#a0a0a0] transition-colors"
                   >
                     Ir a la tienda
                   </button>
