@@ -11,6 +11,7 @@ import {
 } from '@ionic/react';
 import { home, settings } from 'ionicons/icons';
 import { useHistory } from 'react-router-dom';
+import Footer from './Footer';
 
 interface LayoutProps {
   children: React.ReactNode;
@@ -24,7 +25,7 @@ const Layout: React.FC<LayoutProps> = ({ children, title }) => {
     <IonPage>
       <IonHeader className="ion-no-border">
         <IonToolbar className="bg-[var(--navbar-background)]">
-          <IonTitle className={`font-semibold text-white ${title}`}>{title}</IonTitle>
+          <IonTitle className="font-semibold text-white">{title}</IonTitle>
           <IonButtons slot="end">
             <IonButton
               className="text-white"
@@ -41,9 +42,12 @@ const Layout: React.FC<LayoutProps> = ({ children, title }) => {
           </IonButtons>
         </IonToolbar>
       </IonHeader>
-      <IonContent>
-        {children}
+      <IonContent className="ion-padding">
+        <div className="max-w-7xl mx-auto">
+          {children}
+        </div>
       </IonContent>
+      <Footer />
     </IonPage>
   );
 };

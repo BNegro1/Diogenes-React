@@ -22,18 +22,30 @@ const CatalogTable: React.FC<CatalogTableProps> = ({
     comuna: ''
   });
 
+  // Reset filters and pagination when records change
+  useEffect(() => {
+    setFilters({
+      estado: '',
+      formato: '',
+      comuna: ''
+    });
+    setCurrentPage(1);
+    setFilteredRecords(records);
+  }, [records]);
+
   useEffect(() => {
     setFilteredRecords(records.filter(record => {
       return (!filters.estado || record.ESTADO === filters.estado) &&
              (!filters.formato || record.FORMATO === filters.formato) &&
              (!filters.comuna || record.COMUNA === filters.comuna);
     }));
+    setCurrentPage(1); // Reset to first page when filters change
   }, [filters, records]);
 
   useEffect(() => {
     const totalPages = Math.ceil(filteredRecords.length / itemsPerPage);
     const pages: number[] = [];
-    const maxDisplayPages = 5;
+    const maxDisplayPages = window.innerWidth < 640 ? 3 : 5; // Fewer pages on mobile
     
     let startPage = Math.max(1, currentPage - Math.floor(maxDisplayPages / 2));
     let endPage = Math.min(totalPages, startPage + maxDisplayPages - 1);
@@ -65,7 +77,7 @@ const CatalogTable: React.FC<CatalogTableProps> = ({
   }
 
   return (
-    <div>
+    <div className="mb-20"> {/* Added bottom margin to prevent footer overlap */}
       <div className="mb-4 grid grid-cols-1 md:grid-cols-3 gap-4">
         <IonSelect
           interface="popover"
@@ -195,12 +207,12 @@ const CatalogTable: React.FC<CatalogTableProps> = ({
       </div>
 
       {filteredRecords.length > itemsPerPage && (
-        <div className="flex justify-center mt-6 gap-2">
+        <div className="flex justify-center mt-6 gap-1 sm:gap-2 px-2 overflow-x-auto">
           <IonButton
             fill="clear"
             disabled={currentPage === 1}
             onClick={() => setCurrentPage(1)}
-            className="border-2 border-[#404040]"
+            className="min-w-[40px] sm:min-w-[auto] border-2 border-[#404040]"
           >
             «
           </IonButton>
@@ -208,7 +220,7 @@ const CatalogTable: React.FC<CatalogTableProps> = ({
             fill="clear"
             disabled={currentPage === 1}
             onClick={() => setCurrentPage(p => p - 1)}
-            className="border-2 border-[#404040]"
+            className="min-w-[40px] sm:min-w-[auto] border-2 border-[#404040]"
           >
             ‹
           </IonButton>
@@ -217,7 +229,9 @@ const CatalogTable: React.FC<CatalogTableProps> = ({
               key={page}
               fill={currentPage === page ? "solid" : "clear"}
               onClick={() => setCurrentPage(page)}
-              className={`border-2 border-[#404040] ${currentPage === page ? 'bg-[#ff1a1a] text-white' : ''}`}
+              className={`min-w-[40px] sm:min-w-[auto] border-2 border-[#404040] ${
+                currentPage === page ? 'bg-[#ff1a1a] text-white' : ''
+              }`}
             >
               {page}
             </IonButton>
@@ -226,7 +240,7 @@ const CatalogTable: React.FC<CatalogTableProps> = ({
             fill="clear"
             disabled={currentPage === Math.ceil(filteredRecords.length / itemsPerPage)}
             onClick={() => setCurrentPage(p => p + 1)}
-            className="border-2 border-[#404040]"
+            className="min-w-[40px] sm:min-w-[auto] border-2 border-[#404040]"
           >
             ›
           </IonButton>
@@ -234,7 +248,7 @@ const CatalogTable: React.FC<CatalogTableProps> = ({
             fill="clear"
             disabled={currentPage === Math.ceil(filteredRecords.length / itemsPerPage)}
             onClick={() => setCurrentPage(Math.ceil(filteredRecords.length / itemsPerPage))}
-            className="border-2 border-[#404040]"
+            className="min-w-[40px] sm:min-w-[auto] border-2 border-[#404040]"
           >
             »
           </IonButton>

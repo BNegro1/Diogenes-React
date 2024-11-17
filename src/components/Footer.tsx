@@ -5,7 +5,7 @@ import { IonIcon } from '@ionic/react';
 
 const Footer: React.FC = () => {
   return (
-    <IonFooter className="footer-container">
+    <IonFooter className="mt-auto relative bottom-0 w-full">
       <IonToolbar className="footer-toolbar">
         <div className="max-w-7xl mx-auto">
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6 items-center">

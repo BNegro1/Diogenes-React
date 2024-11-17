@@ -1,5 +1,5 @@
 import React from 'react';
-import { IonContent, IonPage, IonHeader, IonToolbar, IonButtons, IonButton, IonSelect, IonSelectOption, IonIcon } from '@ionic/react';
+import { IonContent, IonPage, IonHeader, IonToolbar, IonButtons, IonButton, IonIcon } from '@ionic/react';
 import { useHistory } from 'react-router-dom';
 import { useStore } from '../store/useStore';
 import ResultsTable from '../components/ResultsTable';
@@ -37,48 +37,45 @@ const Results: React.FC = () => {
         </IonToolbar>
       </IonHeader>
 
-      <IonContent className="flex flex-col min-h-screen">
-        <div className="flex-grow">
-          <div className="max-w-7xl mx-auto p-4">
-            <div className="flex items-center justify-between mb-6">
-              <h1 className="text-3xl font-bold">Resultados de la búsqueda</h1>
-              <IonButton
-                fill="clear"
-                onClick={() => {
-                  resetFilters();
-                  history.push('/home');
-                }}
-                className="flex items-center"
-              >
-                <IonIcon icon={arrowBack} slot="start" />
-                Nueva búsqueda
-              </IonButton>
-            </div>
-            
-            <div className="mb-6 flex items-center justify-end">
-              <span className="mr-2">Mostrar por página:</span>
-              <IonSelect
-                value={itemsPerPage}
-                onIonChange={e => setItemsPerPage(e.detail.value)}
-                interface="popover"
-                className="bg-[#e0e0e0] rounded-md"
-              >
-                <IonSelectOption value={10}>10</IonSelectOption>
-                <IonSelectOption value={20}>20</IonSelectOption>
-                <IonSelectOption value={50}>50</IonSelectOption>
-              </IonSelect>
-            </div>
-
-            <ResultsTable 
-              records={records} 
-              itemsPerPage={itemsPerPage}
-              isLoading={isLoading}
-              searchTerms={searchTerms}
-            />
+      <IonContent className="ion-padding">
+        <div className="max-w-7xl mx-auto">
+          <div className="flex flex-col sm:flex-row items-center justify-between mb-6 gap-4">
+            <h1 className="text-2xl sm:text-3xl font-bold">Resultados de la búsqueda</h1>
+            <IonButton
+              fill="clear"
+              onClick={() => {
+                resetFilters();
+                history.push('/home');
+              }}
+              className="flex items-center"
+            >
+              <IonIcon icon={arrowBack} slot="start" />
+              Nueva búsqueda
+            </IonButton>
           </div>
+          
+          <div className="mb-6 flex items-center justify-end">
+            <label className="mr-2 text-sm sm:text-base">Mostrar por página:</label>
+            <select
+              value={itemsPerPage}
+              onChange={(e) => setItemsPerPage(Number(e.target.value))}
+              className="p-2 border-2 border-[#404040] rounded-lg bg-white"
+            >
+              <option value={10}>10</option>
+              <option value={20}>20</option>
+              <option value={50}>50</option>
+            </select>
+          </div>
+
+          <ResultsTable 
+            records={records} 
+            itemsPerPage={itemsPerPage}
+            isLoading={isLoading}
+            searchTerms={searchTerms}
+          />
         </div>
-        <Footer />
       </IonContent>
+      <Footer />
     </IonPage>
   );
 };

@@ -29,16 +29,22 @@
 }
 
 /* Footer Styles */
-.footer-container {
-  --background: #0a0a0a !important;
-  --border: none !important;
-}
-
 .footer-toolbar {
   --background: #0a0a0a !important;
   --color: #ffffff !important;
   --border-color: transparent !important;
-  padding: 1.5rem 1rem;
+}
+
+.footer-container {
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  background-color: #fff; /* Asegúrate de que el fondo sea visible */
+  z-index: 1000; /* Asegúrate de que el footer esté por encima de otros elementos */
+}
+
+.content {
+  padding-bottom: 60px; /* Ajusta este valor según la altura de tu footer */
 }
 
 .footer-icon {

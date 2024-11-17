@@ -24,18 +24,30 @@ const ResultsTable: React.FC<ResultsTableProps> = ({
     comuna: ''
   });
 
+  // Reset filters and pagination when records change (new search)
+  useEffect(() => {
+    setFilters({
+      estado: '',
+      formato: '',
+      comuna: ''
+    });
+    setCurrentPage(1);
+    setFilteredRecords(records);
+  }, [records]);
+
   useEffect(() => {
     setFilteredRecords(records.filter(record => {
       return (!filters.estado || record.ESTADO === filters.estado) &&
              (!filters.formato || record.FORMATO === filters.formato) &&
              (!filters.comuna || record.COMUNA === filters.comuna);
     }));
+    setCurrentPage(1); // Reset to first page when filters change
   }, [filters, records]);
 
   useEffect(() => {
     const totalPages = Math.ceil(filteredRecords.length / itemsPerPage);
     const pages: number[] = [];
-    const maxDisplayPages = 5;
+    const maxDisplayPages = window.innerWidth < 640 ? 3 : 5; // Fewer pages on mobile
     
     let startPage = Math.max(1, currentPage - Math.floor(maxDisplayPages / 2));
     let endPage = Math.min(totalPages, startPage + maxDisplayPages - 1);
@@ -68,7 +80,7 @@ const ResultsTable: React.FC<ResultsTableProps> = ({
 
   if (records.length === 0) {
     return (
-      <div className="text-center p-8">
+      <div className="text-center p-8 mb-20">
         <p className="text-lg text-[#404040]">
           {searchTerms 
             ? `No se encontraron resultados para "${searchTerms.artist} ${searchTerms.album}".`
@@ -79,7 +91,7 @@ const ResultsTable: React.FC<ResultsTableProps> = ({
   }
 
   return (
-    <div>
+    <div className="mb-20"> {/* Added bottom margin to prevent footer overlap */}
       {searchTerms && (
         <h2 className="text-xl mb-4 text-[#0a0a0a]">
           Resultados de búsqueda: {searchTerms.artist && `Artista "${searchTerms.artist}"`} 
@@ -217,12 +229,12 @@ const ResultsTable: React.FC<ResultsTableProps> = ({
       </div>
 
       {filteredRecords.length > itemsPerPage && (
-        <div className="flex justify-center mt-6 gap-2">
+        <div className="flex justify-center mt-6 gap-1 sm:gap-2 px-2 overflow-x-auto">
           <IonButton
             fill="clear"
             disabled={currentPage === 1}
             onClick={() => setCurrentPage(1)}
-            className="border-2 border-[#404040]"
+            className="min-w-[40px] sm:min-w-[auto] border-2 border-[#404040]"
           >
             «
           </IonButton>
@@ -230,7 +242,7 @@ const ResultsTable: React.FC<ResultsTableProps> = ({
             fill="clear"
             disabled={currentPage === 1}
             onClick={() => setCurrentPage(p => p - 1)}
-            className="border-2 border-[#404040]"
+            className="min-w-[40px] sm:min-w-[auto] border-2 border-[#404040]"
           >
             ‹
           </IonButton>
@@ -239,7 +251,9 @@ const ResultsTable: React.FC<ResultsTableProps> = ({
               key={page}
               fill={currentPage === page ? "solid" : "clear"}
               onClick={() => setCurrentPage(page)}
-              className={`border-2 border-[#404040] ${currentPage === page ? 'bg-[#ff1a1a] text-white' : ''}`}
+              className={`min-w-[40px] sm:min-w-[auto] border-2 border-[#404040] ${
+                currentPage === page ? 'bg-[#ff1a1a] text-white' : ''
+              }`}
             >
               {page}
             </IonButton>
@@ -248,7 +262,7 @@ const ResultsTable: React.FC<ResultsTableProps> = ({
             fill="clear"
             disabled={currentPage === Math.ceil(filteredRecords.length / itemsPerPage)}
             onClick={() => setCurrentPage(p => p + 1)}
-            className="border-2 border-[#404040]"
+            className="min-w-[40px] sm:min-w-[auto] border-2 border-[#404040]"
           >
             ›
           </IonButton>
@@ -256,7 +270,7 @@ const ResultsTable: React.FC<ResultsTableProps> = ({
             fill="clear"
             disabled={currentPage === Math.ceil(filteredRecords.length / itemsPerPage)}
             onClick={() => setCurrentPage(Math.ceil(filteredRecords.length / itemsPerPage))}
-            className="border-2 border-[#404040]"
+            className="min-w-[40px] sm:min-w-[auto] border-2 border-[#404040]"
           >
             »
           </IonButton>
