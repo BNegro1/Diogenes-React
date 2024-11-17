@@ -91,7 +91,7 @@ const ResultsTable: React.FC<ResultsTableProps> = ({
   }
 
   return (
-    <div className="mb-20"> {/* Added bottom margin to prevent footer overlap */}
+    <div className="mb-20"> 
       {searchTerms && (
         <h2 className="text-xl mb-4 text-[#0a0a0a]">
           Resultados de búsqueda: {searchTerms.artist && `Artista "${searchTerms.artist}"`} 

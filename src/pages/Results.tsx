@@ -23,7 +23,7 @@ const Results: React.FC = () => {
           <div className="flex justify-between items-center px-4">
             <div onClick={goHome} className="flex items-center gap-2 cursor-pointer">
               <IonIcon icon={disc} className="text-white text-2xl" />
-              <h1 className="text-white text-xl">Tu Vinilo</h1>
+              <h1 className="text-white text-xl">Diogenes Discs</h1>
             </div>
             <IonButtons slot="end">
               <IonButton fill="clear" color="light" onClick={goHome}>
