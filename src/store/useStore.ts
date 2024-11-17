@@ -13,9 +13,10 @@ interface Store {
   setIsLoading: (loading: boolean) => void;
   searchRecordsFromDb: (artist?: string, album?: string) => Promise<void>;
   loadAllRecords: () => Promise<void>;
+  getPredictiveResults: (term: string, type: 'artist' | 'album') => VinylRecord[];
 }
 
-export const useStore = create<Store>((set) => ({
+export const useStore = create<Store>((set, get) => ({
   records: [],
   allRecords: [],
   isLoading: false,
@@ -27,11 +28,29 @@ export const useStore = create<Store>((set) => ({
   searchRecordsFromDb: async (artist = '', album = '') => {
     set({ isLoading: true, searchTerms: { artist, album } });
     const records = await searchRecords(artist, album);
-    set({ records, isLoading: false });
+    
+    // Filter exact matches if full name is provided
+    const filteredRecords = records.filter(record => {
+      if (artist && !album) {
+        return record.ARTISTA.toLowerCase() === artist.toLowerCase();
+      }
+      return true;
+    });
+    
+    set({ records: filteredRecords.length > 0 ? filteredRecords : records, isLoading: false });
   },
   loadAllRecords: async () => {
     set({ isLoading: true });
     const records = await getAllRecords();
     set({ allRecords: records, isLoading: false });
   },
+  getPredictiveResults: (term: string, type: 'artist' | 'album') => {
+    const { allRecords } = get();
+    const searchTerm = term.toLowerCase();
+    
+    return allRecords.filter(record => {
+      const field = type === 'artist' ? record.ARTISTA : record.ALBUM;
+      return field.toLowerCase().includes(searchTerm);
+    });
+  }
 }));

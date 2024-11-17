@@ -26,10 +26,13 @@ const RecordTable: React.FC<RecordTableProps> = ({
     if (!sortConfig) return records;
 
     return [...records].sort((a, b) => {
-      if (a[sortConfig.key] < b[sortConfig.key]) {
+      const aValue = a[sortConfig.key];
+      const bValue = b[sortConfig.key];
+
+      if (aValue < bValue) {
         return sortConfig.direction === 'asc' ? -1 : 1;
       }
-      if (a[sortConfig.key] > b[sortConfig.key]) {
+      if (aValue > bValue) {
         return sortConfig.direction === 'asc' ? 1 : -1;
       }
       return 0;
@@ -69,13 +72,65 @@ const RecordTable: React.FC<RecordTableProps> = ({
   }
 
   const TableHeader: React.FC<{ label: string; field: keyof VinylRecord }> = ({ label, field }) => (
-    <th className="px-4 py-2 cursor-pointer hover:bg-gray-700 transition-colors"
-        onClick={() => handleSort(field)}>
+    <th 
+      className="px-4 py-2 cursor-pointer hover:bg-gray-700 transition-colors"
+      onClick={() => handleSort(field)}
+    >
       <div className="flex items-center justify-center gap-2">
         {label}
-        <ArrowUpDown className="h-4 w-4" />
+        <ArrowUpDown className="h-4 w-5" />
       </div>
     </th>
+  );
+
+  const MobileCard: React.FC<{ record: VinylRecord }> = ({ record }) => (
+    <div className="bg-white rounded-lg shadow-md p-4 mb-4 border border-gray-200">
+      <div className="grid grid-cols-1 gap-3">
+        <div className="border-b pb-2">
+          <div className="font-semibold text-gray-600">Código</div>
+          <div className="text-lg">{record.CODIGO}</div>
+        </div>
+        
+        <div className="border-b pb-2">
+          <div className="font-semibold text-gray-600">Artista</div>
+          <div className="text-lg">{record.ARTISTA}</div>
+        </div>
+        
+        <div className="border-b pb-2">
+          <div className="font-semibold text-gray-600">Álbum</div>
+          <div className="text-lg">{record.ALBUM}</div>
+        </div>
+        
+        <div className="border-b pb-2">
+          <div className="font-semibold text-gray-600">Estado</div>
+          <div className="text-lg">{record.ESTADO}</div>
+        </div>
+        
+        <div className="border-b pb-2">
+          <div className="font-semibold text-gray-600">Precio</div>
+          <div className="text-lg">${record.PRECIO.toLocaleString()}</div>
+        </div>
+        
+        <div className="border-b pb-2">
+          <div className="font-semibold text-gray-600">Formato</div>
+          <div className="text-lg">{record.FORMATO}</div>
+        </div>
+        
+        <div className="border-b pb-2">
+          <div className="font-semibold text-gray-600">Comuna</div>
+          <div className="text-lg">{record.COMUNA}</div>
+        </div>
+        
+        <div>
+          <div className="font-semibold text-gray-600">Contacto</div>
+          <div className="text-lg">
+            <a href="#" className="text-blue-600 hover:text-blue-800">
+              {record.CONTACTO}
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
   );
 
   return (
@@ -88,8 +143,16 @@ const RecordTable: React.FC<RecordTableProps> = ({
         </h2>
       )}
 
-      <div className="overflow-x-auto">
-        <table className="min-w-full bg-white border border-gray-200">
+      {/* Mobile View */}
+      <div className="md:hidden space-y-4">
+        {visibleRecords.map((record) => (
+          <MobileCard key={record.CODIGO} record={record} />
+        ))}
+      </div>
+
+      {/* Desktop View */}
+      <div className="hidden md:block overflow-x-auto">
+        <table className="min-w-full bg-white border border-gray-200 rounded-lg overflow-hidden">
           <thead>
             <tr className="bg-gray-800 text-white text-center">
               <TableHeader label="Código" field="CODIGO" />
@@ -103,18 +166,24 @@ const RecordTable: React.FC<RecordTableProps> = ({
             </tr>
           </thead>
           <tbody>
-            {visibleRecords.map((record) => (
-              <tr key={record.CODIGO} className="border-b hover:bg-gray-50 text-center">
-                <td className="px-4 py-2">{record.CODIGO}</td>
-                <td className="px-4 py-2">${record.PRECIO.toLocaleString()}</td>
-                <td className="px-4 py-2">{record.ARTISTA}</td>
-                <td className="px-4 py-2">{record.ALBUM}</td>
-                <td className="px-4 py-2">{record.ESTADO}</td>
-                <td className="px-4 py-2">{record.FORMATO}</td>
-                <td className="px-4 py-2">{record.COMUNA}</td>
-                <td className="px-4 py-2">
+            {visibleRecords.map((record, index) => (
+              <tr 
+                key={record.CODIGO} 
+                className={`
+                  border-b hover:bg-gray-50 text-center
+                  ${index % 2 === 0 ? 'bg-gray-50' : 'bg-white'}
+                `}
+              >
+                <td className="px-4 py-3 border-r">{record.CODIGO}</td>
+                <td className="px-4 py-3 border-r">${record.PRECIO.toLocaleString()}</td>
+                <td className="px-4 py-3 border-r">{record.ARTISTA}</td>
+                <td className="px-4 py-3 border-r">{record.ALBUM}</td>
+                <td className="px-4 py-3 border-r">{record.ESTADO}</td>
+                <td className="px-4 py-3 border-r">{record.FORMATO}</td>
+                <td className="px-4 py-3 border-r">{record.COMUNA}</td>
+                <td className="px-4 py-3">
                   <a href="#" className="text-blue-600 hover:text-blue-800">
-                    Contacto
+                    {record.CONTACTO}
                   </a>
                 </td>
               </tr>
@@ -124,7 +193,7 @@ const RecordTable: React.FC<RecordTableProps> = ({
       </div>
 
       {records.length > itemsPerPage && (
-        <div className="flex justify-center mt-4 gap-2">
+        <div className="flex justify-center mt-6 gap-2">
           <IonButton
             fill="clear"
             disabled={currentPage === 1}
