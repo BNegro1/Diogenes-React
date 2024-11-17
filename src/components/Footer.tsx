@@ -1,38 +1,39 @@
 import React from 'react';
 import { IonFooter, IonToolbar } from '@ionic/react';
-import { Disc, Instagram, Facebook, Twitter } from 'lucide-react';
+import { disc, logoInstagram, logoFacebook, logoTwitter } from 'ionicons/icons';
+import { IonIcon } from '@ionic/react';
 
 const Footer: React.FC = () => {
   return (
-    <IonFooter className="bg-[#0a0a0a] mt-8">
-      <IonToolbar className="px-4 py-6">
+    <IonFooter className="footer-container">
+      <IonToolbar className="footer-toolbar">
         <div className="max-w-7xl mx-auto">
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6 items-center">
             {/* Logo y nombre */}
             <div className="flex items-center justify-center md:justify-start gap-2">
-              <Disc className="text-white" size={24} />
-              <span className="text-white text-lg font-bold">
+              <IonIcon icon={disc} className="footer-icon" />
+              <span className="footer-title">
                 Diogenes Discs
               </span>
             </div>
             
             {/* Derechos reservados */}
             <div className="text-center">
-              <p className="text-white text-sm">
+              <p className="footer-text">
                 © 2024 Diogenes Discs - Todos los derechos reservados
               </p>
             </div>
 
             {/* Redes sociales */}
             <div className="flex justify-center md:justify-end gap-6">
-              <a href="#" className="text-white hover:text-gray-300 transition-colors">
-                <Instagram size={20} />
+              <a href="#" className="footer-social-link">
+                <IonIcon icon={logoInstagram} className="footer-social-icon" />
               </a>
-              <a href="#" className="text-white hover:text-gray-300 transition-colors">
-                <Facebook size={20} />
+              <a href="#" className="footer-social-link">
+                <IonIcon icon={logoFacebook} className="footer-social-icon" />
               </a>
-              <a href="#" className="text-white hover:text-gray-300 transition-colors">
-                <Twitter size={20} />
+              <a href="#" className="footer-social-link">
+                <IonIcon icon={logoTwitter} className="footer-social-icon" />
               </a>
             </div>
           </div>

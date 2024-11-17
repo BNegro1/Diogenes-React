@@ -37,7 +37,10 @@ export const useStore = create<Store>((set, get) => ({
   setRecords: (records) => set({ records }),
   setUser: (user) => set({ user }),
   setIsLoading: (isLoading) => set({ isLoading }),
-  resetFilters: () => set({ filters: { estado: '', formato: '', comuna: '' } }),
+  resetFilters: () => set({
+    filters: { estado: '', formato: '', comuna: '' },
+    searchTerms: null
+  }),
   setFilters: (filters) => set({ filters }),
   searchRecordsFromDb: async (artist = '', album = '') => {
     set({ isLoading: true, searchTerms: { artist, album } });
