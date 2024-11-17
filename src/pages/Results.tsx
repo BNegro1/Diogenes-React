@@ -4,14 +4,10 @@ import { useHistory } from 'react-router-dom';
 import { useStore } from '../store/useStore';
 import RecordTable from '../components/RecordTable';
 
-const Catalog: React.FC = () => {
+const Results: React.FC = () => {
   const history = useHistory();
-  const { allRecords, loadAllRecords, isLoading } = useStore();
+  const { records, isLoading, searchTerms } = useStore();
   const [itemsPerPage, setItemsPerPage] = React.useState(10);
-
-  React.useEffect(() => {
-    loadAllRecords();
-  }, [loadAllRecords]);
 
   return (
     <IonPage>
@@ -33,7 +29,7 @@ const Catalog: React.FC = () => {
 
       <IonContent className="ion-padding">
         <div className="max-w-7xl mx-auto">
-          <h1 className="text-3xl font-bold mb-6 text-center">Catálogo de Vinilos</h1>
+          <h1 className="text-3xl font-bold mb-6 text-center">Resultados de la búsqueda</h1>
           
           <div className="mb-6 flex items-center justify-end">
             <span className="mr-2">Mostrar por página:</span>
@@ -50,14 +46,25 @@ const Catalog: React.FC = () => {
           </div>
 
           <RecordTable 
-            records={allRecords} 
+            records={records} 
             itemsPerPage={itemsPerPage}
             isLoading={isLoading}
+            searchTerms={searchTerms}
           />
+          
+          <div className="mt-6">
+            <IonButton
+              fill="solid"
+              color="medium"
+              onClick={() => history.push('/home')}
+            >
+              Volver a la búsqueda
+            </IonButton>
+          </div>
         </div>
       </IonContent>
     </IonPage>
   );
 };
 
-export default Catalog;
+export default Results;

@@ -9,7 +9,7 @@ const dbPath = join(__dirname, '..', 'data', 'records.db');
 function setupDatabase() {
   try {
     const db = new Database(dbPath);
-    
+
     // Habilitar WAL mode para mejor rendimiento
     db.pragma('journal_mode = WAL');
     db.pragma('foreign_keys = ON');

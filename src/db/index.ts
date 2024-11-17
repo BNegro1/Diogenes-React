@@ -1,4 +1,4 @@
-import { ref, set, get} from 'firebase/database';
+import { ref, set, get } from 'firebase/database';
 import { db } from '../config/firebase';
 import { VinylRecord } from '../types/Record';
 

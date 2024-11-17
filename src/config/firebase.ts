@@ -1,4 +1,3 @@
-// src/config/firebase.ts
 import { initializeApp } from 'firebase/app';
 import { getDatabase } from 'firebase/database';
 import { getAnalytics } from 'firebase/analytics';
